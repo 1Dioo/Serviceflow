@@ -10,17 +10,16 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(
-            App.class.getResource("/com/serviceflow/view/MainView.fxml")
+            App.class.getResource("/com/serviceflow/view/LoginView.fxml")
         );
 
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 1100, 700);
+        Scene scene = new Scene(root, 480, 600);
 
         stage.setTitle("Serviceflow");
         stage.setScene(scene);
-        stage.setMinWidth(900);
-        stage.setMinHeight(600);
+        stage.setResizable(false);
         stage.show();
     }
 

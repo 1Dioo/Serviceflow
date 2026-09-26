@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.serviceflow.controller.RegisterController"
+           stylesheets="@../css/style.css"
+           styleClass="login-page">
+
+    <VBox styleClass="login-card"
+          spacing="16"
+          alignment="CENTER">
+
+        <padding>
+            <Insets top="30"
+                    right="40"
+                    bottom="30"
+                    left="40"/>
+        </padding>
+
+
+        <!-- IDENTIDADE -->
+
+        <VBox alignment="CENTER"
+              spacing="6">
+
+            <Label text="ServiceFlow"
+                   styleClass="login-logo"/>
+
+            <Label text="Criar sua conta"
+                   styleClass="login-title"/>
+
+            <Label text="Cadastre-se para começar"
+                   styleClass="login-subtitle"/>
+
+        </VBox>
+
+
+        <!-- NOME -->
+
+        <VBox spacing="7">
+
+            <Label text="Nome completo"
+                   styleClass="field-label"/>
+
+            <TextField fx:id="nameField"
+                       promptText="Digite seu nome"
+                       styleClass="login-field"/>
+
+        </VBox>
+
+
+        <!-- USUÁRIO -->
+
+        <VBox spacing="7">
+
+            <Label text="Nome de usuário"
+                   styleClass="field-label"/>
+
+            <TextField fx:id="usernameField"
+                       promptText="Escolha um nome de usuário"
+                       styleClass="login-field"/>
+
+        </VBox>
+
+
+        <!-- SENHA -->
+
+        <VBox spacing="7">
+
+            <Label text="Senha"
+                   styleClass="field-label"/>
+
+            <PasswordField fx:id="passwordField"
+                           promptText="Crie uma senha"
+                           styleClass="login-field"/>
+
+        </VBox>
+
+
+        <!-- CONFIRMAR SENHA -->
+
+        <VBox spacing="7">
+
+            <Label text="Confirmar senha"
+                   styleClass="field-label"/>
+
+            <PasswordField fx:id="confirmPasswordField"
+                           promptText="Digite a senha novamente"
+                           styleClass="login-field"/>
+
+        </VBox>
+
+
+        <!-- MENSAGEM -->
+
+        <Label fx:id="messageLabel"
+               styleClass="login-message"
+               visible="false"
+               managed="false"/>
+
+
+        <!-- CRIAR -->
+
+        <Button text="Criar conta"
+                fx:id="registerButton"
+                maxWidth="Infinity"
+                onAction="#handleRegister"
+                styleClass="login-button"/>
+
+
+        <!-- VOLTAR -->
+
+        <Button text="Já possui uma conta? Entrar"
+                fx:id="backButton"
+                onAction="#handleBack"
+                styleClass="register-button"/>
+
+    </VBox>
+
+</StackPane>

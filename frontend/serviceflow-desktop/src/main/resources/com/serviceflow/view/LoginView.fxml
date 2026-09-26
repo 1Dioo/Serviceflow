@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.serviceflow.controller.LoginController"
+           stylesheets="@../css/style.css"
+           styleClass="login-page">
+
+    <VBox styleClass="login-card"
+          spacing="20"
+          alignment="CENTER">
+
+        <padding>
+            <Insets top="35"
+                    right="40"
+                    bottom="35"
+                    left="40"/>
+        </padding>
+
+
+        <!-- IDENTIDADE -->
+
+        <VBox alignment="CENTER"
+              spacing="6">
+
+            <Label text="ServiceFlow"
+                   styleClass="login-logo"/>
+
+            <Label text="Entre na sua conta"
+                   styleClass="login-title"/>
+
+            <Label text="Acesse o gerenciamento do seu negócio"
+                   styleClass="login-subtitle"/>
+
+        </VBox>
+
+
+        <!-- CAMPOS -->
+
+        <VBox spacing="8">
+
+            <Label text="Nome de usuário"
+                   styleClass="field-label"/>
+
+            <TextField fx:id="usernameField"
+                       promptText="Digite seu nome de usuário"
+                       styleClass="login-field"/>
+
+        </VBox>
+
+
+        <VBox spacing="8">
+
+            <Label text="Senha"
+                   styleClass="field-label"/>
+
+            <PasswordField fx:id="passwordField"
+                           promptText="Digite sua senha"
+                           styleClass="login-field"/>
+
+        </VBox>
+
+
+        <!-- MENSAGEM -->
+
+        <Label fx:id="messageLabel"
+               styleClass="login-message"
+               visible="false"
+               managed="false"/>
+
+
+        <!-- ENTRAR -->
+
+        <Button text="Entrar"
+                fx:id="loginButton"
+                maxWidth="Infinity"
+                onAction="#handleLogin"
+                styleClass="login-button"/>
+
+
+        <!-- CADASTRO -->
+
+        <VBox alignment="CENTER"
+              spacing="6">
+
+            <Label text="Ainda não possui uma conta?"
+                   styleClass="register-text"/>
+
+            <Button text="Criar uma conta"
+                    fx:id="registerButton"
+                    onAction="#handleRegister"
+                    styleClass="register-button"/>
+
+        </VBox>
+
+    </VBox>
+
+</StackPane>
