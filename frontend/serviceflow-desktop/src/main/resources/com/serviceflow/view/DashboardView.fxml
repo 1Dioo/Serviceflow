@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -30,7 +31,7 @@
         <VBox alignment="CENTER_RIGHT"
               spacing="3">
 
-            <Label text="21 de setembro de 2026"
+            <Label text="26 de setembro de 2026"
                    styleClass="date"/>
 
             <Label text="Hoje"
@@ -39,6 +40,33 @@
         </VBox>
 
     </HBox>
+
+
+    <!-- ÁREA DE BOAS-VINDAS -->
+
+    <VBox styleClass="welcome-card"
+          spacing="8">
+
+        <Label text="Bem-vindo ao ServiceFlow"
+               styleClass="welcome-title"/>
+
+        <Label text="Gerencie seus serviços, clientes e agendamentos de forma simples e organizada."
+               styleClass="welcome-description"/>
+
+        <HBox alignment="CENTER_LEFT"
+              spacing="10">
+
+            <Label text="Desenvolvido por Diogo Rodrigues"
+                   styleClass="welcome-author"/>
+
+            <Button text="GitHub"
+                    fx:id="githubButton"
+                    onAction="#handleGitHub"
+                    styleClass="github-button"/>
+
+        </HBox>
+
+    </VBox>
 
 
     <!-- CARDS DE ESTATÍSTICAS -->
@@ -92,7 +120,7 @@
     </HBox>
 
 
-    <!-- ÁREA INFERIOR -->
+    <!-- CONTEÚDO INFERIOR -->
 
     <HBox spacing="20"
           VBox.vgrow="ALWAYS">
