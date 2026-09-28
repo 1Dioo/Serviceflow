@@ -16,6 +16,16 @@ public class MainController {
         loadDashboard();
     }
 
+    @FXML 
+    private void handleDashboard() {
+        loadView("/com/serviceflow/view/DashboardView.fxml");
+    }
+
+    @FXML 
+    private void handleAgenda() {
+        loadView("/com/serviceflow/view/AgendaView.fxml");
+    }
+
     private void loadDashboard() {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -25,6 +35,20 @@ public class MainController {
             Node dashboard = loader.load();
             contentArea.getChildren().clear();
             contentArea.getChildren().add(dashboard);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadView(String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                getClass().getResource(fxml)
+            );
+
+            Node view = loader.load();
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(view);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,198 +1,23 @@
-/* =========================
-   DASHBOARD
-   ========================= */
-
-.dashboard {
-    -fx-background-color: #f4f5f7;
-    -fx-padding: 35px;
-}
-
-.page-title {
-    -fx-text-fill: #17191d;
-    -fx-font-size: 30px;
-    -fx-font-weight: bold;
-}
-
-.page-subtitle {
-    -fx-text-fill: #777d87;
-    -fx-font-size: 14px;
-}
-
-.date {
-    -fx-text-fill: #343840;
-    -fx-font-size: 13px;
-    -fx-font-weight: bold;
-}
-
-.date-label {
-    -fx-text-fill: #9298a3;
-    -fx-font-size: 12px;
-}
-
-
-/* =========================
-   STAT CARDS
-   ========================= */
-
-.stat-card {
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 12px;
-    -fx-border-color: #e5e7eb;
-    -fx-border-radius: 12px;
-    -fx-border-width: 1px;
-    -fx-padding: 20px;
-    -fx-min-height: 135px;
-}
-
-.stat-label {
-    -fx-text-fill: #858b95;
-    -fx-font-size: 11px;
-    -fx-font-weight: bold;
-}
-
-.stat-value {
-    -fx-text-fill: #17191d;
-    -fx-font-size: 30px;
-    -fx-font-weight: bold;
-}
-
-.stat-description {
-    -fx-text-fill: #9aa0aa;
-    -fx-font-size: 12px;
-}
-
-
-/* =========================
-   PANELS
-   ========================= */
-
-.panel {
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 12px;
-    -fx-border-color: #e5e7eb;
-    -fx-border-radius: 12px;
-    -fx-border-width: 1px;
-    -fx-padding: 22px;
-}
-
-.summary-panel {
-    -fx-pref-width: 280px;
-}
-
-.panel-title {
-    -fx-text-fill: #202329;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-}
-
-.panel-subtitle {
-    -fx-text-fill: #9298a3;
-    -fx-font-size: 12px;
-}
-
-.panel-action {
-    -fx-text-fill: #596273;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-}
-
-.panel-action:hover {
-    -fx-text-fill: #17191d;
-}
-
-
-/* =========================
-   APPOINTMENTS
-   ========================= */
-
-.appointment-row {
-    -fx-background-color: #f8f9fa;
-    -fx-background-radius: 9px;
-    -fx-padding: 14px;
-}
-
-.appointment-time {
-    -fx-text-fill: #343840;
-    -fx-font-size: 13px;
-    -fx-font-weight: bold;
-    -fx-min-width: 45px;
-}
-
-.appointment-name {
-    -fx-text-fill: #25282e;
-    -fx-font-size: 13px;
-    -fx-font-weight: bold;
-}
-
-.appointment-service {
-    -fx-text-fill: #9298a3;
-    -fx-font-size: 11px;
-}
-
-.status-confirmed {
-    -fx-text-fill: #287a50;
-    -fx-background-color: #e7f5ed;
-    -fx-background-radius: 20px;
-    -fx-padding: 6px 10px;
-    -fx-font-size: 10px;
-    -fx-font-weight: bold;
-}
-
-.status-pending {
-    -fx-text-fill: #9a6a16;
-    -fx-background-color: #fff4d9;
-    -fx-background-radius: 20px;
-    -fx-padding: 6px 10px;
-    -fx-font-size: 10px;
-    -fx-font-weight: bold;
-}
-
-
-/* =========================
-   SUMMARY
-   ========================= */
-
-.summary-label {
-    -fx-text-fill: #707681;
-    -fx-font-size: 13px;
-}
-
-.summary-value {
-    -fx-text-fill: #292d34;
-    -fx-font-size: 13px;
-    -fx-font-weight: bold;
-}
-
-.summary-total {
-    -fx-border-color: #e5e7eb transparent transparent transparent;
-    -fx-border-width: 1px 0 0 0;
-    -fx-padding: 15px 0 0 0;
-}
-
-.summary-total-label {
-    -fx-text-fill: #202329;
-    -fx-font-size: 13px;
-    -fx-font-weight: bold;
-}
-
-.summary-total-value {
-    -fx-text-fill: #17191d;
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-}
-
 .app {
-    -fx-background-color: #f4f5f7;
+    -fx-background-color: #111315;
 }
+
+.content-area {
+    -fx-background-color: #111315;
+}
+
+/*
+   SIDEBAR
+*/
 
 .sidebar {
-    -fx-background-color: #15171b;
+    -fx-background-color: #0b0d0f;
     -fx-pref-width: 235px;
     -fx-padding: 28px 18px 24px 18px;
 }
 
 .logo {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #f5f5f5;
     -fx-font-size: 25px;
     -fx-font-weight: bold;
 }
@@ -202,115 +27,22 @@
 }
 
 .menu-item {
-    -fx-text-fill: #9298a3;
+    -fx-text-fill: #858b95;
     -fx-font-size: 14px;
     -fx-font-weight: 500;
     -fx-padding: 13px 15px;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
 }
 
 .menu-item:hover {
     -fx-text-fill: #ffffff;
-    -fx-background-color: #202329;
+    -fx-background-color: #1c2024;
 }
 
 .menu-item-active {
     -fx-text-fill: #ffffff;
-    -fx-background-color: #292d34;
-}
-
-.content-area {
-    -fx-background-color: #f4f5f7;
-}
-
-/*
-    LOGIN
-*/
-
-.login-page {
-    -fx-background-color: #f4f5f7;
-}
-
-.login-card {
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 16px;
-    -fx-border-color: #e5e7eb;
-    -fx-border-width: 1px;
-    -fx-padding: 35px 40px;
-    -fx-max-width: 400px;
-}
-
-.login-logo {
-    -fx-text-fill: #17191d;
-    -fx-font-size: 27px;
-    -fx-font-weight: bold;
-}
-
-.login-title {
-    -fx-text-fill: #202329;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-}
-
-.login-subtitle {
-    -fx-text-fill: #9298a3;
-    -fx-font-size: 12px;
-}
-
-.field-label {
-    -fx-text-fill: #343840;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-}
-
-.login-field {
-    -fx-background-color: #f8f9fa;
-    -fx-border-color: #e1e4e8;
-    -fx-border-width: 8px;
-    -fx-background-radius: 8px;
-    -fx-padding: 11px 13px;
-    -fx-font-size: 13px;
-}
-
-.login-field:focused {
-    -fx-border-color: #292d34;
-    -fx-background-color: #ffffff;
-}
-
-.login-button {
-    -fx-background-color: #292d34;
-    -fx-text-fill: #ffffff;
-    -fx-background-radius: 8px;
-    -fx-padding: 12px;
-    -fx-font-size: 13px;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-}
-
-.login-button:hover {
-    -fx-background-color: #17191d;
-}
-
-.register-text {
-    -fx-text-fill: #9298a3;
-    -fx-font-size: 12px;
-}
-
-.register-button {
-    -fx-backgroun-color: transparent;
-    -fx-text-fill: #343840;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-}
-
-.register-button:hover {
-    -fx-text-fill: #17191d;
-}
-
-.login-mensssage {
-    -fx-text-fill: #9a6a16;
-    -fx-font-size: 11px;
+    -fx-background-color: #25292e;
 }
 
 /*
@@ -318,40 +50,97 @@
 */
 
 .dashboard {
-    -fx-background-color: #f4f5f7;
+    -fx-background-color: #111315;
     -fx-padding: 35px;
 }
 
 .page-title {
-    -fx-text-fill: #17191d;
+    -fx-text-fill: #f5f5f5;
     -fx-font-size: 30px;
     -fx-font-weight: bold;
 }
 
 .page-subtitle {
-    -fx-text-fill: #777d87;
+    -fx-text-fill: #858b95;
     -fx-font-size: 14px;
 }
 
 .date {
-    -fx-text-fill: #343840;
+    -fx-text-fill: #d5d8dc;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
 
 .date-label {
-    -fx-text-fill: #9298a3;
+    -fx-text-fill: #70757e;
     -fx-font-size: 12px;
 }
+/* PARTE DE APRESENTAÇÃO */
+.welcome-card {
+    -fx-background-color: #181b1f;
+    -fx-background-radius: 12px;
+    -fx-border-color: #292e34;
+    -fx-border-radius: 12px;
+    -fx-border-width: 1px;
+    -fx-padding: 22px 24px;
+}
+
+.welcome-title {
+    -fx-text-fill: #f5f5f5;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.welcome-description {
+    -fx-text-fill: #aeb3ba;
+    -fx-font-size: 14px;
+}
+
+.welcome-author {
+    -fx-text-fill: #858b95;
+    -fx-font-size: 13px;
+}
+/* BOTÃO DO GITHUB */
+.github-button {
+    -fx-background-color: #20242a;
+    -fx-text-fill: #eeeeee;
+    -fx-border-color: #353b42;
+    -fx-border-width: 1px;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-padding: 7px 14px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.github-button:hover {
+    -fx-background-color: #292e34;
+    -fx-border-color: #4a515a;
+    -fx-text-fill: #ffffff;
+}
+
+.github-button:pressed {
+    -fx-background-color: #15181b;
+}
+
+/*
+   CARDS DE ESTATÍSTICAS
+*/
 
 .stat-card {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #181b1f;
     -fx-background-radius: 12px;
-    -fx-border-color: #e5e7eb;
+    -fx-border-color: #292e34;
     -fx-border-radius: 12px;
     -fx-border-width: 1px;
     -fx-padding: 20px;
     -fx-min-height: 135px;
+}
+
+.stat-card:hover {
+    -fx-background-color: #1c2024;
+    -fx-border-color: #353b42;
 }
 
 .stat-label {
@@ -361,20 +150,24 @@
 }
 
 .stat-value {
-    -fx-text-fill: #17191d;
+    -fx-text-fill: #f5f5f5;
     -fx-font-size: 30px;
     -fx-font-weight: bold;
 }
 
 .stat-description {
-    -fx-text-fill: #9aa0aa;
+    -fx-text-fill: #70757e;
     -fx-font-size: 12px;
 }
 
+/*
+   PAINÉIS
+*/
+
 .panel {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #181b1f;
     -fx-background-radius: 12px;
-    -fx-border-color: #e5e7eb;
+    -fx-border-color: #292e34;
     -fx-border-radius: 12px;
     -fx-border-width: 1px;
     -fx-padding: 22px;
@@ -385,53 +178,66 @@
 }
 
 .panel-title {
-    -fx-text-fill: #202329;
+    -fx-text-fill: #eeeeee;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
 
 .panel-subtitle {
-    -fx-text-fill: #9298a3;
+    -fx-text-fill: #70757e;
     -fx-font-size: 12px;
 }
 
 .panel-action {
-    -fx-text-fill: #596273;
+    -fx-text-fill: #aeb3ba;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 
 .panel-action:hover {
-    -fx-text-fill: #17191d;
+    -fx-text-fill: #ffffff;
 }
 
+/*
+   AGENDAMENTOS DO DASHBOARD
+*/
+
 .appointment-row {
-    -fx-background-color: #f8f9fa;
+    -fx-background-color: #20242a;
     -fx-background-radius: 9px;
     -fx-padding: 14px;
 }
 
+.appointment-row:hover {
+    -fx-background-color: #252a30;
+}
+
 .appointment-time {
-    -fx-text-fill: #343840;
+    -fx-text-fill: #d5d8dc;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
     -fx-min-width: 45px;
 }
 
 .appointment-name {
-    -fx-text-fill: #25282e;
+    -fx-text-fill: #eeeeee;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
 
 .appointment-service {
-    -fx-text-fill: #9298a3;
+    -fx-text-fill: #858b95;
     -fx-font-size: 11px;
 }
 
+/*
+   STATUS
+*/
+
 .status-confirmed {
-    -fx-text-fill: #287a50;
-    -fx-background-color: #e7f5ed;
+    -fx-text-fill: #78c99a;
+    -fx-background-color: #193326;
     -fx-background-radius: 20px;
     -fx-padding: 6px 10px;
     -fx-font-size: 10px;
@@ -439,39 +245,417 @@
 }
 
 .status-pending {
-    -fx-text-fill: #9a6a16;
-    -fx-background-color: #fff4d9;
+    -fx-text-fill: #d7ad5c;
+    -fx-background-color: #352c1a;
     -fx-background-radius: 20px;
     -fx-padding: 6px 10px;
     -fx-font-size: 10px;
     -fx-font-weight: bold;
 }
 
+/*
+   RESUMO
+*/
+
 .summary-label {
-    -fx-text-fill: #707681;
+    -fx-text-fill: #858b95;
     -fx-font-size: 13px;
 }
 
 .summary-value {
-    -fx-text-fill: #292d34;
+    -fx-text-fill: #dfe2e5;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
 
 .summary-total {
-    -fx-border-color: #e5e7eb transparent transparent transparent;
+    -fx-border-color: #292e34 transparent transparent transparent;
     -fx-border-width: 1px 0 0 0;
     -fx-padding: 15px 0 0 0;
 }
 
 .summary-total-label {
-    -fx-text-fill: #202329;
+    -fx-text-fill: #eeeeee;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
 
 .summary-total-value {
-    -fx-text-fill: #17191d;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
+}
+
+/*
+   LOGIN
+*/
+
+.login-page {
+    -fx-background-color: #0f1113;
+}
+
+.login-card {
+    -fx-background-color: #181b1f;
+    -fx-background-radius: 16px;
+    -fx-border-color: #292e34;
+    -fx-border-radius: 16px;
+    -fx-border-width: 1px;
+    -fx-padding: 35px 40px;
+    -fx-max-width: 400px;
+}
+
+.login-logo {
+    -fx-text-fill: #f5f5f5;
+    -fx-font-size: 27px;
+    -fx-font-weight: bold;
+}
+
+.login-title {
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.login-subtitle {
+    -fx-text-fill: #858b95;
+    -fx-font-size: 12px;
+}
+
+.field-label {
+    -fx-text-fill: #c8ccd1;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.login-field {
+    -fx-background-color: #111315;
+    -fx-text-fill: #eeeeee;
+    -fx-prompt-text-fill: #626870;
+    -fx-border-color: #30353b;
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 11px 13px;
+    -fx-font-size: 13px;
+}
+
+.login-field:focused {
+    -fx-border-color: #858b95;
+    -fx-background-color: #15181b;
+}
+
+.login-button {
+    -fx-background-color: #eeeeee;
+    -fx-text-fill: #111315;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #ffffff;
+}
+
+.register-text {
+    -fx-text-fill: #70757e;
+    -fx-font-size: 12px;
+}
+
+.register-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b9bec5;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.register-button:hover {
+    -fx-text-fill: #ffffff;
+}
+
+.login-message {
+    -fx-text-fill: #d7ad5c;
+    -fx-font-size: 11px;
+}
+
+/*
+   AGENDA
+*/
+
+.agenda-scroll {
+    -fx-background-color: #111315;
+    -fx-border-color: transparent;
+}
+
+.agenda-scroll > .viewport {
+    -fx-background-color: #111315;
+}
+
+.agenda {
+    -fx-background-color: #111315;
+    -fx-padding: 35px;
+}
+
+/*
+   BOTÕES
+*/
+
+.primary-button {
+    -fx-background-color: #eeeeee;
+    -fx-text-fill: #111315;
+    -fx-background-radius: 8px;
+    -fx-padding: 11px 16px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.primary-button:hover {
+    -fx-background-color: #ffffff;
+}
+
+.secondary-button {
+    -fx-background-color: #20242a;
+    -fx-text-fill: #d5d8dc;
+    -fx-border-color: #30353b;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-padding: 9px 16px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #292e34;
+    -fx-text-fill: #ffffff;
+}
+
+/*
+   SELETOR DE DATA
+*/
+
+.date-toolbar {
+    -fx-background-color: #181b1f;
+    -fx-background-radius: 10px;
+    -fx-border-color: #292e34;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-padding: 12px 15px;
+}
+
+.date-navigation-button {
+    -fx-background-color: #20242a;
+    -fx-text-fill: #d5d8dc;
+    -fx-background-radius: 7px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-min-width: 36px;
+    -fx-min-height: 36px;
+    -fx-cursor: hand;
+}
+
+.date-navigation-button:hover {
+    -fx-background-color: #292e34;
+    -fx-text-fill: #ffffff;
+}
+
+.agenda-date {
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.agenda-day {
+    -fx-text-fill: #70757e;
+    -fx-font-size: 11px;
+}
+
+/*
+   PAINEL DA AGENDA
+*/
+
+.agenda-panel {
+    -fx-background-color: #181b1f;
+    -fx-background-radius: 12px;
+    -fx-border-color: #292e34;
+    -fx-border-radius: 12px;
+    -fx-border-width: 1px;
+}
+
+/*
+   HORÁRIOS
+*/
+
+.time-row {
+    -fx-border-color: transparent transparent #292e34 transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.time-label {
+    -fx-text-fill: #70757e;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-min-width: 65px;
+    -fx-alignment: CENTER;
+}
+
+.time-separator {
+    -fx-background-color: #292e34;
+    -fx-pref-width: 1px;
+}
+
+/*
+   AGENDAMENTO NA AGENDA
+*/
+
+.appointment-block {
+    -fx-background-color: #24282e;
+    -fx-background-radius: 7px;
+    -fx-padding: 8px 12px;
+    -fx-margin: 5px;
+}
+
+.appointment-block:hover {
+    -fx-background-color: #2b3036;
+}
+
+.agenda-client {
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.agenda-service {
+    -fx-text-fill: #858b95;
+    -fx-font-size: 11px;
+}
+
+/*
+   NOVO AGENDAMENTO
+*/
+
+.appointment-form {
+    -fx-background-color: #111315;
+}
+
+.form-title {
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.form-subtitle {
+    -fx-text-fill: #70757e;
+    -fx-font-size: 12px;
+}
+
+.form-field {
+    -fx-background-color: #181b1f;
+    -fx-text-fill: #eeeeee;
+    -fx-prompt-text-fill: #626870;
+    -fx-border-color: #30353b;
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px 12px;
+    -fx-font-size: 12px;
+}
+
+.form-field:focused {
+    -fx-border-color: #858b95;
+    -fx-background-color: #1c2024;
+}
+
+.form-message {
+    -fx-text-fill: #d7ad5c;
+    -fx-font-size: 11px;
+}
+
+/*
+   DATE PICKER
+*/
+
+.date-picker {
+    -fx-background-color: #181b1f;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #20242a;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #292e34;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #eeeeee;
+}
+
+.date-picker .text-field {
+    -fx-background-color: #181b1f;
+    -fx-text-fill: #eeeeee;
+}
+
+/*
+   COMBOBOX
+*/
+
+.combo-box {
+    -fx-background-color: #181b1f;
+    -fx-border-color: #30353b;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #181b1f;
+    -fx-text-fill: #eeeeee;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #181b1f;
+    -fx-border-color: #30353b;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #292e34;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #30353b;
+}
+
+/*
+   SCROLLBAR
+*/
+
+.scroll-bar {
+    -fx-background-color: #111315;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #111315;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #30353b;
+    -fx-background-radius: 8px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #454b53;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: #111315;
+    -fx-padding: 0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
 }

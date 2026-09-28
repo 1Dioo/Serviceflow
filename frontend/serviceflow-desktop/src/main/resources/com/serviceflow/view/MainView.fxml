@@ -28,9 +28,11 @@
                   styleClass="menu">
 
                 <Label text="Dashboard"
+                       onMouseClicked="#handleDashboard"
                        styleClass="menu-item menu-item-active"/>
 
                 <Label text="Agenda"
+                       onMouseClicked="#handleAgenda"
                        styleClass="menu-item"/>
 
                 <Label text="Clientes"

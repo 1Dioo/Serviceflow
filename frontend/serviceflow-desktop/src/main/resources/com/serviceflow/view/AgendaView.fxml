@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.serviceflow.controller.AgendaController"
+            fitToWidth="true"
+            styleClass="agenda-scroll">
+
+    <VBox styleClass="agenda"
+          spacing="25">
+
+        <!-- CABEÇALHO -->
+
+        <HBox alignment="CENTER_LEFT">
+
+            <VBox spacing="5">
+
+                <Label text="Agenda"
+                       styleClass="page-title"/>
+
+                <Label text="Gerencie os agendamentos do seu negócio"
+                       styleClass="page-subtitle"/>
+
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="+ Novo agendamento"
+                    onAction="#handleNewAppointment"
+                    styleClass="primary-button"/>
+
+        </HBox>
+
+
+        <!-- DATA -->
+
+        <HBox styleClass="date-toolbar"
+              alignment="CENTER_LEFT"
+              spacing="10">
+
+            <Button text="‹"
+                    onAction="#handlePreviousDay"
+                    styleClass="date-navigation-button"/>
+
+            <VBox alignment="CENTER"
+                  spacing="2">
+
+                <Label fx:id="dateLabel"
+                       styleClass="agenda-date"/>
+
+                <Label fx:id="dayLabel"
+                       styleClass="agenda-day"/>
+
+            </VBox>
+
+            <Button text="›"
+                    onAction="#handleNextDay"
+                    styleClass="date-navigation-button"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="Hoje"
+                    onAction="#handleToday"
+                    styleClass="secondary-button"/>
+
+        </HBox>
+
+
+        <!-- GRADE DA AGENDA -->
+
+        <VBox fx:id="scheduleContainer"
+              styleClass="agenda-panel"
+              spacing="0"/>
+
+    </VBox>
+
+</ScrollPane>
