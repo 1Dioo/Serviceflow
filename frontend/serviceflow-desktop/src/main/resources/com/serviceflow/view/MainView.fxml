@@ -18,27 +18,37 @@
 
             <!-- LOGO -->
 
-            <Label text="ServiceFlow"
-                   styleClass="logo"/>
+            <VBox spacing="3"
+                  styleClass="logo-area">
+
+                <Label text="ServiceFlow"
+                       styleClass="logo"/>
+
+                <Label text="Gestão de serviços"
+                       styleClass="logo-subtitle"/>
+
+            </VBox>
 
 
             <!-- MENU -->
 
-            <VBox spacing="8"
+            <VBox spacing="6"
                   styleClass="menu">
 
                 <Label text="Dashboard"
                        onMouseClicked="#handleDashboard"
-                       styleClass="menu-item menu-item-active"/>
+                       styleClass="menu-item"/>
 
                 <Label text="Agenda"
                        onMouseClicked="#handleAgenda"
                        styleClass="menu-item"/>
 
                 <Label text="Clientes"
+                       onMouseClicked="#handleClientes"
                        styleClass="menu-item"/>
 
                 <Label text="Serviços"
+                       onMouseClicked="#handleServicos"
                        styleClass="menu-item"/>
 
                 <Label text="Profissionais"
@@ -55,10 +65,26 @@
             <Region VBox.vgrow="ALWAYS"/>
 
 
-            <!-- CONFIGURAÇÕES -->
+            <!-- RODAPÉ -->
 
-            <Label text="Configurações"
-                   styleClass="menu-item"/>
+            <VBox spacing="8"
+                  styleClass="sidebar-footer">
+
+                <Label text="Configurações"
+                       styleClass="menu-item"/>
+
+                <VBox spacing="2"
+                      styleClass="sidebar-info">
+
+                    <Label text="ServiceFlow"
+                           styleClass="sidebar-info-title"/>
+
+                    <Label text="v1.0 • Em desenvolvimento"
+                           styleClass="sidebar-info-text"/>
+
+                </VBox>
+
+            </VBox>
 
         </VBox>
 

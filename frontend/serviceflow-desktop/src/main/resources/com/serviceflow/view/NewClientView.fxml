@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.serviceflow.controller.NewClientController"
+      styleClass="new-client-page"
+      spacing="18">
+
+    <padding>
+        <Insets top="28"
+                right="30"
+                bottom="28"
+                left="30"/>
+    </padding>
+
+
+    <!-- CABEÇALHO -->
+
+    <VBox spacing="5">
+
+        <Label fx:id="formTitle"
+               text="Novo cliente"
+               styleClass="form-title"/>
+
+        <Label fx:id="formSubtitle"
+               text="Cadastre as informações do cliente"
+               styleClass="form-subtitle"/>
+
+    </VBox>
+
+
+    <!-- NOME -->
+
+    <VBox spacing="7">
+
+        <Label text="Nome completo"
+               styleClass="field-label"/>
+
+        <TextField fx:id="nameField"
+                   promptText="Digite o nome completo"
+                   styleClass="form-field"/>
+
+    </VBox>
+
+
+    <!-- TELEFONE -->
+
+    <VBox spacing="7">
+
+        <Label text="Telefone"
+               styleClass="field-label"/>
+
+        <TextField fx:id="phoneField"
+                   promptText="(88) 99999-9999"
+                   styleClass="form-field"/>
+
+    </VBox>
+
+
+    <!-- E-MAIL -->
+
+    <VBox spacing="7">
+
+        <Label text="E-mail"
+               styleClass="field-label"/>
+
+        <TextField fx:id="emailField"
+                   promptText="cliente@email.com"
+                   styleClass="form-field"/>
+
+    </VBox>
+
+
+    <!-- OBSERVAÇÕES -->
+
+    <VBox spacing="7"
+          VBox.vgrow="ALWAYS">
+
+        <Label text="Observações"
+               styleClass="field-label"/>
+
+        <TextArea fx:id="notesField"
+                  promptText="Adicione alguma observação sobre o cliente..."
+                  wrapText="true"
+                  VBox.vgrow="ALWAYS"
+                  styleClass="form-text-area"/>
+
+    </VBox>
+
+
+    <!-- MENSAGEM -->
+
+    <Label fx:id="messageLabel"
+           visible="false"
+           managed="false"
+           styleClass="form-message"/>
+
+
+    <!-- BOTÕES -->
+
+    <HBox alignment="CENTER_RIGHT"
+          spacing="10">
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <Button text="Cancelar"
+                onAction="#handleCancel"
+                styleClass="secondary-button"/>
+
+        <Button fx:id="saveButton"
+                text="Salvar cliente"
+                onAction="#handleSave"
+                styleClass="primary-button"/>
+
+    </HBox>
+
+</VBox>

@@ -26,6 +26,16 @@ public class MainController {
         loadView("/com/serviceflow/view/AgendaView.fxml");
     }
 
+    @FXML 
+    private void handleClientes() {
+        loadView("/com/serviceflow/view/ClientesView.fxml");
+    }
+
+    @FXML 
+    private void handleServicos() {
+        loadView("/com/serviceflow/view/ServicosView.fxml");
+    }
+
     private void loadDashboard() {
         try {
             FXMLLoader loader = new FXMLLoader(

@@ -12,8 +12,14 @@
 
 .sidebar {
     -fx-background-color: #0b0d0f;
-    -fx-pref-width: 235px;
-    -fx-padding: 28px 18px 24px 18px;
+    -fx-pref-width: 245px;
+    -fx-padding: 30px 16px 20px 16px;
+    -fx-border-color: transparent #20242a transparent transparent;
+    -fx-border-width: 0 1px 0 0;
+}
+
+.logo-area {
+    -fx-padding: 0 10px;
 }
 
 .logo {
@@ -22,27 +28,54 @@
     -fx-font-weight: bold;
 }
 
+.logo-subtitle {
+    -fx-text-fill: #626870;
+    -fx-font-size: 11px;
+}
+
 .menu {
-    -fx-padding: 25px 0 0 0;
+    -fx-padding: 30px 0 0 0;
 }
 
 .menu-item {
     -fx-text-fill: #858b95;
-    -fx-font-size: 14px;
+    -fx-font-size: 13px;
     -fx-font-weight: 500;
-    -fx-padding: 13px 15px;
+    -fx-padding: 13px 14px;
     -fx-background-radius: 8px;
     -fx-cursor: hand;
 }
 
 .menu-item:hover {
-    -fx-text-fill: #ffffff;
-    -fx-background-color: #1c2024;
+    -fx-text-fill: #eeeeee;
+    -fx-background-color: #191d21;
 }
 
 .menu-item-active {
     -fx-text-fill: #ffffff;
-    -fx-background-color: #25292e;
+    -fx-background-color: #252a30;
+    -fx-font-weight: bold;
+}
+
+.sidebar-footer {
+    -fx-padding: 0;
+}
+
+.sidebar-info {
+    -fx-padding: 14px 14px 0 14px;
+    -fx-border-color: #20242a transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.sidebar-info-title {
+    -fx-text-fill: #858b95;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-info-text {
+    -fx-text-fill: #50565e;
+    -fx-font-size: 9px;
 }
 
 /*
@@ -658,4 +691,230 @@
 .scroll-bar .increment-arrow,
 .scroll-bar .decrement-arrow {
     -fx-background-color: transparent;
+}
+
+/* ============================= */
+/* CLIENTES */
+/* ============================= */
+
+.clientes-page {
+    -fx-background-color: #111315;
+    -fx-padding: 30px;
+}
+
+.clientes-page .page-title {
+    -fx-text-fill: #f5f5f5;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.clientes-page .page-subtitle {
+    -fx-text-fill: #858b95;
+    -fx-font-size: 12px;
+}
+
+/* Área de pesquisa */
+
+.client-search {
+    -fx-background-color: transparent;
+}
+
+.search-field {
+    -fx-background-color: #181b1f;
+    -fx-text-fill: #eeeeee;
+    -fx-prompt-text-fill: #626870;
+
+    -fx-border-color: #292e34;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+
+    -fx-padding: 10px 13px;
+    -fx-font-size: 12px;
+}
+
+.search-field:focused {
+    -fx-background-color: #1b1f23;
+    -fx-border-color: #4a5159;
+}
+
+.client-count {
+    -fx-text-fill: #626870;
+    -fx-font-size: 11px;
+    -fx-padding: 0 0 0 2px;
+}
+
+/* Painel */
+
+.clients-panel {
+    -fx-background-color: #181b1f;
+
+    -fx-border-color: #292e34;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+
+    -fx-padding: 0;
+}
+
+/* Cabeçalho da tabela */
+
+.client-header {
+    -fx-background-color: #1d2125;
+
+    -fx-border-color: transparent transparent #292e34 transparent;
+    -fx-border-width: 0 0 1px 0;
+
+    -fx-padding: 14px 16px;
+}
+
+.client-header-label {
+    -fx-text-fill: #6f767f;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+/* Linhas */
+
+.client-row {
+    -fx-background-color: #181b1f;
+
+    -fx-border-color: transparent transparent #24292f transparent;
+    -fx-border-width: 0 0 1px 0;
+
+    -fx-padding: 15px 16px;
+}
+
+.client-row:hover {
+    -fx-background-color: #1d2125;
+}
+
+.client-name {
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.client-data {
+    -fx-text-fill: #858b95;
+    -fx-font-size: 12px;
+}
+
+/* Botões pequenos */
+
+.small-button {
+    -fx-background-color: #20242a;
+    -fx-text-fill: #c5c9ce;
+
+    -fx-border-color: #30363d;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+
+    -fx-padding: 6px 10px;
+
+    -fx-font-size: 10px;
+    -fx-cursor: hand;
+}
+
+.small-button:hover {
+    -fx-background-color: #292e34;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #454c55;
+}
+
+.small-button-danger {
+    -fx-background-color: #211a1b;
+    -fx-text-fill: #c98282;
+
+    -fx-border-color: #382628;
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+
+    -fx-padding: 6px 10px;
+
+    -fx-font-size: 10px;
+    -fx-cursor: hand;
+}
+
+.small-button-danger:hover {
+    -fx-background-color: #2a1e20;
+    -fx-text-fill: #e39a9a;
+    -fx-border-color: #513034;
+}
+
+/*
+    SERVIÇOS
+*/
+
+.servicos-page {
+    -fx-background-color: #111315;
+}
+
+.services-scroll {
+    -fx-background-color: #111315;
+    -fx-border-color: transparent;
+}
+
+.services-scroll > .viewport {
+    -fx-background-color: #111315;
+}
+
+.services-list {
+    -fx-background-color: #111315;
+}
+
+.service-row {
+    -fx-background-color: #181b1f;
+    -fx-background-radius: 10px;
+    -fx-border-color: #292e34;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 14px 16px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.service-row:hover {
+    -fx-background-color: #1d2125;
+    -fx-border-color: #353b42;
+}
+
+.service-info {
+    -fx-min-width: 260px;
+}
+
+.service-name {
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.service-description {
+    -fx-text-fill: #70757e;
+    -fx-font-size: 11px;
+}
+
+.service-data {
+    -fx-text-fill: #858b95;
+    -fx-font-size: 12px;
+    -fx-min-width: 80px;
+}
+
+.service-price {
+    -fx-text-fill: #dfe2e5;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-min-width: 90px;
+}
+
+.service-status {
+    -fx-text-fill: #78c99a;
+    -fx-background-color: #193326;
+    -fx-background-radius: 20px;
+    -fx-padding: 6px 10px;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-min-width: 45px;
+    -fx-alignment: CENTER;
 }
