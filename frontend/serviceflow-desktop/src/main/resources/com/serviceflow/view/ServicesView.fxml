@@ -11,7 +11,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.serviceflow.controller.ServicosController"
+            fx:controller="com.serviceflow.controller.ServicesController"
             stylesheets="@../css/style.css"
             styleClass="servicos-page">
 
@@ -26,7 +26,10 @@
                    styleClass="page-subtitle"/>
 
             <padding>
-                <Insets top="30" right="30" bottom="20" left="30"/>
+                <Insets top="30"
+                        right="30"
+                        bottom="20"
+                        left="30"/>
             </padding>
 
         </VBox>
@@ -62,7 +65,10 @@
             </ScrollPane>
 
             <padding>
-                <Insets top="0" right="30" bottom="30" left="30"/>
+                <Insets top="0"
+                        right="30"
+                        bottom="30"
+                        left="30"/>
             </padding>
 
         </VBox>

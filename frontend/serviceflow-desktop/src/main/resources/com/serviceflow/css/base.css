@@ -1,0 +1,36 @@
+
+.app {
+    -fx-background-color: #111315;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+}
+
+.content-area {
+    -fx-background-color: #111315;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+}
+
+.page-title {
+    -fx-text-fill: #f5f5f5;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+
+.page-subtitle {
+    -fx-text-fill: #858b95;
+    -fx-font-size: 13px;
+    -fx-wrap-text: true;
+}
+
+.date {
+    -fx-text-fill: #d5d8dc;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.date-label {
+    -fx-text-fill: #70757e;
+    -fx-font-size: 12px;
+}

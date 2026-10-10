@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true"
+            styleClass="reports-scroll"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.serviceflow.controller.RelatoriosController">
+
+    <content>
+        <VBox spacing="24" styleClass="reports-page">
+            <padding>
+                <Insets top="30" right="32" bottom="30" left="32"/>
+            </padding>
+
+            <VBox spacing="6">
+                <Label text="Relatórios" styleClass="page-title"/>
+                <Label text="Acompanhe os resultados do seu negócio."
+                       styleClass="page-subtitle"/>
+            </VBox>
+
+            <VBox spacing="10" styleClass="reports-filter-panel">
+                <Label text="Período de análise"
+                       styleClass="reports-section-title"/>
+
+                <HBox spacing="12" styleClass="reports-filters">
+                    <VBox spacing="6">
+                        <Label text="Período" styleClass="reports-label"/>
+                        <ComboBox fx:id="periodCombo"
+                                  prefWidth="190"
+                                  promptText="Selecione o período"/>
+                    </VBox>
+
+                    <VBox spacing="6">
+                        <Label text="Data inicial" styleClass="reports-label"/>
+                        <DatePicker fx:id="startDatePicker"
+                                    prefWidth="150"/>
+                    </VBox>
+
+                    <VBox spacing="6">
+                        <Label text="Data final" styleClass="reports-label"/>
+                        <DatePicker fx:id="endDatePicker"
+                                    prefWidth="150"/>
+                    </VBox>
+                </HBox>
+
+                <Label fx:id="periodMessage"
+                       text="Selecione um período para analisar os resultados."
+                       styleClass="reports-muted"/>
+            </VBox>
+
+            <HBox spacing="16" styleClass="reports-metrics">
+                <VBox spacing="10" styleClass="reports-metric-card">
+                    <Label text="Faturamento"
+                           styleClass="reports-muted"/>
+                    <Label fx:id="revenueValue"
+                           text="R$ 0,00"
+                           styleClass="reports-metric-value"/>
+                    <Label text="No período selecionado"
+                           styleClass="reports-small"/>
+                </VBox>
+
+                <VBox spacing="10" styleClass="reports-metric-card">
+                    <Label text="Agendamentos"
+                           styleClass="reports-muted"/>
+                    <Label fx:id="appointmentsValue"
+                           text="0"
+                           styleClass="reports-metric-value"/>
+                    <Label text="No período selecionado"
+                           styleClass="reports-small"/>
+                </VBox>
+
+                <VBox spacing="10" styleClass="reports-metric-card">
+                    <Label text="Concluídos"
+                           styleClass="reports-muted"/>
+                    <Label fx:id="completedValue"
+                           text="0"
+                           styleClass="reports-metric-value"/>
+                    <Label text="Atendimentos concluídos"
+                           styleClass="reports-small"/>
+                </VBox>
+
+                <VBox spacing="10" styleClass="reports-metric-card">
+                    <Label text="Cancelamentos"
+                           styleClass="reports-muted"/>
+                    <Label fx:id="cancelledValue"
+                           text="0"
+                           styleClass="reports-metric-value"/>
+                    <Label text="Agendamentos cancelados"
+                           styleClass="reports-small"/>
+                </VBox>
+            </HBox>
+
+            <VBox spacing="14" styleClass="reports-panel">
+                <Label text="Faturamento por dia"
+                       styleClass="reports-section-title"/>
+
+                <BarChart fx:id="revenueChart"
+                          title=""
+                          animated="false"
+                          legendVisible="false"
+                          prefHeight="300">
+                    <xAxis>
+                        <CategoryAxis label="Data"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Faturamento (R$)"
+                                    forceZeroInRange="true"/>
+                    </yAxis>
+                </BarChart>
+
+                <Label fx:id="revenueChartEmpty"
+                       text="Os dados do faturamento aparecerão aqui quando estiverem disponíveis."
+                       styleClass="reports-muted"/>
+            </VBox>
+
+            <VBox spacing="14" styleClass="reports-panel">
+                <Label text="Situação dos agendamentos"
+                       styleClass="reports-section-title"/>
+
+                <PieChart fx:id="appointmentsChart"
+                          animated="false"
+                          labelsVisible="true"
+                          legendVisible="true"
+                          prefHeight="280"/>
+
+                <Label fx:id="appointmentsChartEmpty"
+                       text="Ainda não há dados suficientes para gerar este gráfico."
+                       styleClass="reports-muted"/>
+            </VBox>
+
+            <VBox spacing="14" styleClass="reports-panel">
+                <Label text="Serviços mais realizados"
+                       styleClass="reports-section-title"/>
+
+                <Label fx:id="servicesRankingEmpty"
+                       text="O ranking será preenchido com os atendimentos registrados."
+                       styleClass="reports-muted"/>
+            </VBox>
+
+            <VBox spacing="14" styleClass="reports-panel">
+                <Label text="Desempenho dos profissionais"
+                       styleClass="reports-section-title"/>
+
+                <Label fx:id="professionalsRankingEmpty"
+                       text="O ranking será preenchido com os atendimentos registrados."
+                       styleClass="reports-muted"/>
+            </VBox>
+        </VBox>
+    </content>
+</ScrollPane>

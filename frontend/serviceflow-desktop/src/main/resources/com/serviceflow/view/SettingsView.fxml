@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true"
+            styleClass="configuracoes-scroll"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.serviceflow.controller.SettingsController">
+
+    <content>
+        <VBox spacing="24" styleClass="configuracoes-page">
+            <padding>
+                <Insets top="30" right="32" bottom="32" left="32"/>
+            </padding>
+
+            <VBox spacing="6">
+                <Label text="Configurações" styleClass="page-title"/>
+                <Label text="Personalize o ServiceFlow de acordo com seu negócio."
+                       styleClass="page-subtitle"/>
+            </VBox>
+
+            <!-- Perfil da empresa -->
+            <VBox spacing="16" styleClass="configuracoes-card">
+                <VBox spacing="5">
+                    <Label text="Perfil da empresa"
+                           styleClass="configuracoes-section-title"/>
+                    <Label text="Informações básicas do seu negócio."
+                           styleClass="configuracoes-description"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Nome da empresa"
+                           styleClass="configuracoes-label"/>
+                    <TextField fx:id="companyNameField"
+                               promptText="Ex.: ServiceFlow Assistência Técnica"/>
+                </VBox>
+
+                <HBox spacing="16">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Telefone"
+                               styleClass="configuracoes-label"/>
+                        <TextField fx:id="phoneField"
+                                   promptText="(00) 00000-0000"/>
+                    </VBox>
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="E-mail"
+                               styleClass="configuracoes-label"/>
+                        <TextField fx:id="emailField"
+                                   promptText="contato@empresa.com"/>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="6">
+                    <Label text="Endereço"
+                           styleClass="configuracoes-label"/>
+                    <TextField fx:id="addressField"
+                               promptText="Rua, número, bairro e cidade"/>
+                </VBox>
+            </VBox>
+
+            <!-- Aparência -->
+            <VBox spacing="16" styleClass="configuracoes-card">
+                <VBox spacing="5">
+                    <Label text="Aparência"
+                           styleClass="configuracoes-section-title"/>
+                    <Label text="Escolha como deseja visualizar o sistema."
+                           styleClass="configuracoes-description"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Tema"
+                           styleClass="configuracoes-label"/>
+                    <ComboBox fx:id="themeCombo"
+                              maxWidth="Infinity"
+                              promptText="Selecione o tema"/>
+                </VBox>
+
+                <Label text="O tema selecionado será aplicado nesta interface quando essa opção estiver implementada."
+                       styleClass="configuracoes-hint"
+                       wrapText="true"/>
+            </VBox>
+
+            <!-- Preferências de atendimento -->
+            <VBox spacing="16" styleClass="configuracoes-card">
+                <VBox spacing="5">
+                    <Label text="Preferências de atendimento"
+                           styleClass="configuracoes-section-title"/>
+                    <Label text="Defina os padrões utilizados na agenda."
+                           styleClass="configuracoes-description"/>
+                </VBox>
+
+                <HBox spacing="16">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Abertura"
+                               styleClass="configuracoes-label"/>
+                        <ComboBox fx:id="openingTimeCombo"
+                                  maxWidth="Infinity"
+                                  promptText="Horário inicial"/>
+                    </VBox>
+
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Fechamento"
+                               styleClass="configuracoes-label"/>
+                        <ComboBox fx:id="closingTimeCombo"
+                                  maxWidth="Infinity"
+                                  promptText="Horário final"/>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="6">
+                    <Label text="Intervalo entre atendimentos"
+                           styleClass="configuracoes-label"/>
+                    <ComboBox fx:id="intervalCombo"
+                              maxWidth="Infinity"
+                              promptText="Selecione o intervalo"/>
+                </VBox>
+            </VBox>
+
+            <!-- Notificações -->
+            <VBox spacing="16" styleClass="configuracoes-card">
+                <VBox spacing="5">
+                    <Label text="Notificações"
+                           styleClass="configuracoes-section-title"/>
+                    <Label text="Escolha quais avisos deseja habilitar."
+                           styleClass="configuracoes-description"/>
+                </VBox>
+
+                <CheckBox fx:id="appointmentNotificationsCheck"
+                          text="Avisos de novos agendamentos"
+                          styleClass="configuracoes-checkbox"/>
+
+                <Separator styleClass="configuracoes-separator"/>
+
+                <CheckBox fx:id="reminderNotificationsCheck"
+                          text="Lembretes de atendimento"
+                          styleClass="configuracoes-checkbox"/>
+
+                <Separator styleClass="configuracoes-separator"/>
+
+                <CheckBox fx:id="systemNotificationsCheck"
+                          text="Avisos gerais do sistema"
+                          styleClass="configuracoes-checkbox"/>
+            </VBox>
+
+            <!-- Ações -->
+            <HBox spacing="12" alignment="CENTER_RIGHT">
+                <Label fx:id="feedbackLabel"
+                       text=""
+                       wrapText="true"
+                       styleClass="configuracoes-feedback"
+                       HBox.hgrow="ALWAYS"/>
+
+                <Button text="Restaurar"
+                        onAction="#handleReset"
+                        styleClass="secondary-button"/>
+
+                <Button text="Salvar configurações"
+                        onAction="#handleSave"
+                        styleClass="primary-button"/>
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

@@ -1,0 +1,233 @@
+
+.professionals-page {
+    -fx-background-color: #111315;
+    -fx-min-width: 0;
+}
+
+.professionals-page .page-title {
+    -fx-text-fill: #F5F5F5;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.professionals-page .page-subtitle {
+    -fx-text-fill: #858B95;
+    -fx-font-size: 13px;
+    -fx-wrap-text: true;
+}
+
+.professionals-page .section-title {
+    -fx-text-fill: #EEEEEE;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+.professional-filters {
+    -fx-alignment: CENTER_LEFT;
+}
+
+.professional-search,
+.professional-combo {
+    -fx-background-color: #181B1F;
+    -fx-text-fill: #EEEEEE;
+    -fx-prompt-text-fill: #626870;
+    -fx-border-color: #30353B;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-size: 12px;
+    -fx-min-width: 0;
+}
+
+.professional-search {
+    -fx-padding: 11px 13px;
+}
+
+.professional-search:focused,
+.professional-combo:focused {
+    -fx-border-color: #858B95;
+}
+
+.professional-combo .list-cell {
+    -fx-text-fill: #EEEEEE;
+    -fx-background-color: #181B1F;
+}
+
+.professional-combo .arrow {
+    -fx-background-color: #D5D8DC;
+}
+
+.professional-combo .list-view {
+    -fx-background-color: #181B1F;
+    -fx-border-color: #30353B;
+}
+
+.professional-combo .list-view .list-cell {
+    -fx-padding: 9px;
+}
+
+.professional-combo .list-view .list-cell:hover {
+    -fx-background-color: #292E34;
+}
+
+.professional-stats {
+    -fx-alignment: CENTER_LEFT;
+}
+
+.professional-stat-card {
+    -fx-background-color: #181B1F;
+    -fx-background-radius: 10px;
+    -fx-border-color: #292E34;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 14px;
+    -fx-pref-width: 200px;
+    -fx-min-width: 0;
+}
+
+.professional-stat-label {
+    -fx-text-fill: #858B95;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.professional-stat-value {
+    -fx-text-fill: #F5F5F5;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.professional-scroll,
+.professional-scroll > .viewport {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.professional-grid {
+    -fx-background-color: transparent;
+    -fx-padding: 2px 4px 12px 2px;
+}
+
+.professional-card {
+    -fx-background-color: #181B1F;
+    -fx-background-radius: 12px;
+    -fx-border-color: #292E34;
+    -fx-border-width: 1px;
+    -fx-border-radius: 12px;
+    -fx-padding: 16px;
+    -fx-spacing: 12px;
+    -fx-min-width: 0;
+}
+
+.professional-card:hover {
+    -fx-border-color: #454B53;
+    -fx-background-color: #1D2125;
+}
+
+.professional-avatar {
+    -fx-background-color: #20242A;
+    -fx-background-radius: 30px;
+    -fx-min-width: 48px;
+    -fx-min-height: 48px;
+    -fx-pref-width: 48px;
+    -fx-pref-height: 48px;
+    -fx-alignment: CENTER;
+    -fx-text-fill: #EEEEEE;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.professional-name {
+    -fx-text-fill: #F5F5F5;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+
+.professional-role {
+    -fx-text-fill: #D5D8DC;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.professional-availability,
+.professional-profile-status {
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.status-available,
+.profile-active {
+    -fx-text-fill: #78C99A;
+}
+
+.status-busy {
+    -fx-text-fill: #D7AD5C;
+}
+
+.status-unavailable,
+.profile-inactive {
+    -fx-text-fill: #C98282;
+}
+
+.professional-experience {
+    -fx-text-fill: #D0D0D0;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.professional-section-label {
+    -fx-text-fill: #858B95;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.professional-body-text {
+    -fx-text-fill: #D5D8DC;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.professional-hire-button {
+    -fx-background-color: #EEEEEE;
+    -fx-text-fill: #111315;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 7px;
+    -fx-padding: 10px 12px;
+    -fx-cursor: hand;
+}
+
+.professional-hire-button:hover {
+    -fx-background-color: #FFFFFF;
+}
+
+.professional-hire-button:pressed {
+    -fx-background-color: #D5D8DC;
+}
+
+.professional-profile-button {
+    -fx-background-color: #20242A;
+    -fx-text-fill: #D5D8DC;
+    -fx-font-size: 12px;
+    -fx-border-color: #30353B;
+    -fx-border-width: 1px;
+    -fx-border-radius: 7px;
+    -fx-background-radius: 7px;
+    -fx-padding: 10px 12px;
+    -fx-cursor: hand;
+}
+
+.professional-profile-button:hover {
+    -fx-background-color: #292E34;
+    -fx-border-color: #454B53;
+    -fx-text-fill: #FFFFFF;
+}
+
+.professional-empty {
+    -fx-text-fill: #858B95;
+    -fx-font-size: 14px;
+    -fx-padding: 20px;
+    -fx-wrap-text: true;
+}

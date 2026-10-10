@@ -1,0 +1,99 @@
+
+.login-page {
+    -fx-background-color: #0f1113;
+    -fx-padding: 20px;
+}
+
+.login-card {
+    -fx-background-color: #181b1f;
+    -fx-background-radius: 16px;
+    -fx-border-color: #292e34;
+    -fx-border-radius: 16px;
+    -fx-border-width: 1px;
+    -fx-padding: 28px;
+    -fx-max-width: 400px;
+    -fx-pref-width: 400px;
+}
+
+.login-logo {
+    -fx-text-fill: #f5f5f5;
+    -fx-font-size: 27px;
+    -fx-font-weight: bold;
+}
+
+.login-title {
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.login-subtitle {
+    -fx-text-fill: #858b95;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.field-label {
+    -fx-text-fill: #c8ccd1;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.login-field {
+    -fx-background-color: #111315;
+    -fx-text-fill: #eeeeee;
+    -fx-prompt-text-fill: #626870;
+    -fx-border-color: #30353b;
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 11px 13px;
+    -fx-font-size: 13px;
+    -fx-pref-width: 300px;
+    -fx-max-width: Infinity;
+}
+
+.login-field:focused {
+    -fx-border-color: #858b95;
+    -fx-background-color: #15181b;
+}
+
+.login-button {
+    -fx-background-color: #eeeeee;
+    -fx-text-fill: #111315;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #ffffff;
+}
+
+.register-text {
+    -fx-text-fill: #70757e;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.register-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b9bec5;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.register-button:hover {
+    -fx-text-fill: #ffffff;
+}
+
+.login-message {
+    -fx-text-fill: #d7ad5c;
+    -fx-font-size: 11px;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}

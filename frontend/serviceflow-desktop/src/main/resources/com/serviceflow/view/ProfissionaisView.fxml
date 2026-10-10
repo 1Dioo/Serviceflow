@@ -1,0 +1,81 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.serviceflow.controller.ProfissionaisController"
+      styleClass="professionals-page"
+      spacing="22">
+
+    <padding>
+        <Insets top="28" right="28" bottom="28" left="28"/>
+    </padding>
+
+    <VBox spacing="6">
+        <Label text="Profissionais"
+               styleClass="page-title"/>
+        <Label text="Encontre talentos para sua equipe e conheça suas especialidades."
+               styleClass="page-subtitle"/>
+    </VBox>
+
+    <HBox spacing="12" styleClass="professional-filters">
+        <TextField fx:id="searchField"
+                   promptText="Buscar por nome, cargo ou habilidade..."
+                   styleClass="professional-search"
+                   HBox.hgrow="ALWAYS"/>
+
+        <ComboBox fx:id="availabilityFilter"
+                  promptText="Disponibilidade"
+                  styleClass="professional-combo"
+                  prefWidth="175"/>
+
+        <ComboBox fx:id="areaFilter"
+                  promptText="Área profissional"
+                  styleClass="professional-combo"
+                  prefWidth="180"/>
+    </HBox>
+
+    <HBox spacing="14" styleClass="professional-stats">
+        <VBox spacing="7" styleClass="professional-stat-card">
+            <Label text="Total de profissionais"
+                   styleClass="professional-stat-label"/>
+            <Label fx:id="totalLabel"
+                   text="8"
+                   styleClass="professional-stat-value"/>
+        </VBox>
+
+        <VBox spacing="7" styleClass="professional-stat-card">
+            <Label text="Disponíveis"
+                   styleClass="professional-stat-label"/>
+            <Label fx:id="availableLabel"
+                   text="6"
+                   styleClass="professional-stat-value"/>
+        </VBox>
+    </HBox>
+
+    <VBox spacing="14" VBox.vgrow="ALWAYS">
+        <Label text="Conheça nossos profissionais"
+               styleClass="section-title"/>
+
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    vbarPolicy="AS_NEEDED"
+                    styleClass="professional-scroll"
+                    VBox.vgrow="ALWAYS">
+            <content>
+                <FlowPane fx:id="professionalsContainer"
+                          hgap="16"
+                          vgap="16"
+                          prefWrapLength="950"
+                          styleClass="professional-grid"/>
+            </content>
+        </ScrollPane>
+    </VBox>
+
+</VBox>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.serviceflow.controller.NewServiceController"
+      stylesheets="@../css/style.css"
+      styleClass="service-form"
+      spacing="20">
+
+    <padding>
+        <Insets top="35" right="35" bottom="35" left="35"/>
+    </padding>
+
+    <VBox spacing="5">
+        <Label fx:id="titleLabel"
+               text="Novo Serviço"
+               styleClass="page-title"/>
+
+        <Label text="Cadastre um novo serviço de TI."
+               styleClass="page-subtitle"/>
+    </VBox>
+
+    <VBox spacing="8">
+
+        <Label text="Nome do serviço"
+               styleClass="field-label"/>
+
+        <TextField fx:id="nameField"
+                   promptText="Ex: Manutenção de computador"
+                   styleClass="form-field"/>
+
+    </VBox>
+
+    <VBox spacing="8">
+
+        <Label text="Descrição"
+               styleClass="field-label"/>
+
+        <TextArea fx:id="descriptionField"
+                  promptText="Descreva o serviço..."
+                  styleClass="form-field"
+                  prefRowCount="4"
+                  wrapText="true"/>
+
+    </VBox>
+
+    <HBox spacing="15">
+
+        <VBox spacing="8"
+              HBox.hgrow="ALWAYS">
+
+            <Label text="Duração"
+                   styleClass="field-label"/>
+
+            <ComboBox fx:id="durationCombo"
+                      promptText="Selecione a duração"
+                      maxWidth="Infinity"
+                      styleClass="form-field"/>
+
+        </VBox>
+
+        <VBox spacing="8"
+              HBox.hgrow="ALWAYS">
+
+            <Label text="Preço"
+                   styleClass="field-label"/>
+
+            <TextField fx:id="priceField"
+                       promptText="Ex: R$ 120,00"
+                       styleClass="form-field"/>
+
+        </VBox>
+
+    </HBox>
+
+    <VBox spacing="8">
+
+        <Label text="Status"
+               styleClass="field-label"/>
+
+        <ComboBox fx:id="statusCombo"
+                  promptText="Selecione o status"
+                  maxWidth="300"
+                  styleClass="form-field"/>
+
+    </VBox>
+
+    <Label fx:id="messageLabel"
+           styleClass="form-message"/>
+
+    <HBox spacing="10"
+          alignment="CENTER_RIGHT">
+
+        <Button text="Cancelar"
+                styleClass="secondary-button"
+                onAction="#handleCancel"/>
+
+        <Button text="Salvar serviço"
+                styleClass="primary-button"
+                onAction="#handleSave"/>
+
+    </HBox>
+
+</VBox>

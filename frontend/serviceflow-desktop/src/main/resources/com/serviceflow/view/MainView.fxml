@@ -52,9 +52,11 @@
                        styleClass="menu-item"/>
 
                 <Label text="Profissionais"
+                       onMouseClicked="#handleProfissionais"
                        styleClass="menu-item"/>
 
                 <Label text="Relatórios"
+                       onMouseClicked="#handleRelatorios"
                        styleClass="menu-item"/>
 
             </VBox>
@@ -71,6 +73,7 @@
                   styleClass="sidebar-footer">
 
                 <Label text="Configurações"
+                       onMouseClicked="#handleSettings"
                        styleClass="menu-item"/>
 
                 <VBox spacing="2"
@@ -79,7 +82,7 @@
                     <Label text="ServiceFlow"
                            styleClass="sidebar-info-title"/>
 
-                    <Label text="v1.0 • Em desenvolvimento"
+                    <Label text="v3.3 • Em desenvolvimento"
                            styleClass="sidebar-info-text"/>
 
                 </VBox>

@@ -19,7 +19,9 @@ public class App extends Application {
 
         stage.setTitle("Serviceflow");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
+        stage.setMinWidth(360);
+        stage.setMinHeight(450);
         stage.show();
     }
 

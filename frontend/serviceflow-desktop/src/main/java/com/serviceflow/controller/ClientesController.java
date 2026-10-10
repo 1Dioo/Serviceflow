@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -234,9 +236,24 @@ public class ClientesController {
         }
     }
 
+    
     private void handleDeleteClient(Client client) {
-        clients.remove(client);
-        renderClients();
+        Alert alert = new Alert(
+            Alert.AlertType.CONFIRMATION,
+            "Deseja excluir o cliente \"" + client.getName() + "\"?",
+            ButtonType.CANCEL,
+            ButtonType.OK
+        );
+
+        alert.setTitle("Confirmar exclusão");
+        alert.setHeaderText("Excluir cliente");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                clients.remove(client);
+                renderClients();
+            }
+        });
     }
 
     private void updateClientCount() {
