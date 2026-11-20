@@ -45,12 +45,19 @@ public class LoginController {
         User user = UserRepository.authenticateUser(username, password);
 
         if (user == null) {
+            passwordField.clear();
+            passwordField.requestFocus();
             showMessage("Usuário ou senha inválidos.");
             return;
         }
 
         UserRepository.setCurrentUser(user);
-        openMainView(loginButton.getScene().getWindow());
+
+        if (!openMainView(loginButton.getScene().getWindow())) {
+            UserRepository.logout();
+            passwordField.clear();
+            showMessage("Não foi possível abrir o sistema.");
+        }
     }
 
     @FXML
@@ -78,22 +85,28 @@ public class LoginController {
             dialog.setTitle("Acesso administrativo");
             dialog.initOwner(loginButton.getScene().getWindow());
             dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.setScene(new Scene(root, 420, 370));
+            dialog.setScene(new Scene(root, 460, 540));
             dialog.setResizable(false);
             dialog.showAndWait();
 
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             e.printStackTrace();
             showMessage("Não foi possível abrir o acesso administrativo.");
         }
     }
 
-    static void openMainView(javafx.stage.Window owner) {
+    /**
+     * Abre a tela principal de acordo com o perfil do usuário logado:
+     * ADMIN vai para o painel administrativo, USER para o MainView.
+     *
+     * @return true se a tela foi aberta; false em caso de erro.
+     */
+    public static boolean openMainView(javafx.stage.Window owner) {
         try {
             User currentUser = UserRepository.getCurrentUser();
 
-            if (currentUser == null) {
-                return;
+            if (currentUser == null || !(owner instanceof Stage)) {
+                return false;
             }
 
             String viewPath;
@@ -104,9 +117,13 @@ public class LoginController {
                 viewPath = "/com/serviceflow/view/MainView.fxml";
             }
 
-            FXMLLoader loader = new FXMLLoader(
-                    LoginController.class.getResource(viewPath)
-            );
+            var resource = LoginController.class.getResource(viewPath);
+
+            if (resource == null) {
+                throw new IOException("FXML não encontrado: " + viewPath);
+            }
+
+            FXMLLoader loader = new FXMLLoader(resource);
 
             Parent root = loader.load();
             Stage stage = (Stage) owner;
@@ -123,8 +140,11 @@ public class LoginController {
             stage.setResizable(true);
             stage.show();
 
-        } catch (IOException e) {
+            return true;
+
+        } catch (IOException | RuntimeException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

@@ -28,6 +28,55 @@ public class Appointment {
         this.status = status;
     }
 
+    /**
+     * Converte as durações usadas no sistema ("30 minutos", "1 hora",
+     * "1 hora e 30 minutos", "2 horas"...) em minutos.
+     * Retorna 0 quando o texto não é reconhecido.
+     */
+    public static int durationToMinutes(String duration) {
+        if (duration == null) {
+            return 0;
+        }
+
+        switch (duration.trim()) {
+            case "30 minutos": return 30;
+            case "45 minutos": return 45;
+            case "1 hora": return 60;
+            case "1 hora e 30 minutos": return 90;
+            case "2 horas": return 120;
+            case "3 horas": return 180;
+            case "4 horas": return 240;
+            default: return 0;
+        }
+    }
+
+    /**
+     * Duração em minutos. Durações não reconhecidas ocupam
+     * ao menos um intervalo da agenda (30 minutos).
+     */
+    public int getDurationMinutes() {
+        int minutes = durationToMinutes(duration);
+        return minutes > 0 ? minutes : 30;
+    }
+
+    public LocalTime getEndTime() {
+        return time.plusMinutes(getDurationMinutes());
+    }
+
+    /**
+     * Indica se este agendamento ocupa algum minuto do intervalo
+     * [start, start + minutes) na data informada.
+     */
+    public boolean overlaps(LocalDate otherDate, LocalTime start, int minutes) {
+        if (date == null || time == null || !date.equals(otherDate)) {
+            return false;
+        }
+
+        LocalTime end = start.plusMinutes(minutes);
+
+        return start.isBefore(getEndTime()) && time.isBefore(end);
+    }
+
     public LocalDate getDate() {
         return date;
     }

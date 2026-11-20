@@ -135,11 +135,36 @@ public final class ServiceRepository {
             .collect(Collectors.toList());
     }
 
+    // Catálogo completo: serviços padrão + cadastrados pelo usuário
+    public static List<Service> getCatalog() {
+        List<Service> catalog = new ArrayList<>(DEFAULT_SERVICES);
+        catalog.addAll(SERVICES);
+
+        return catalog;
+    }
+
+    // Busca um serviço do catálogo pelo nome (sem diferenciar maiúsculas)
+    public static Service findByName(String name) {
+        if (name == null || name.isBlank()) {
+            return null;
+        }
+
+        for (Service service : getCatalog()) {
+            if (service.getName().equalsIgnoreCase(name.trim())) {
+                return service;
+            }
+        }
+
+        return null;
+    }
+
     public static void add(Service service) {
         SERVICES.add(service);
     }
 
     public static void remove(Service service) {
-        SERVICES.remove(service);
+        if (!SERVICES.remove(service)) {
+            DEFAULT_SERVICES.remove(service);
+        }
     }
 }

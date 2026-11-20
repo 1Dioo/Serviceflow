@@ -60,6 +60,15 @@
     -fx-background-color: #2b3036;
 }
 
+/* Horário ocupado por um atendimento iniciado antes */
+.appointment-continuation,
+.appointment-continuation:hover {
+    -fx-background-color: #1d2125;
+    -fx-border-color: transparent transparent transparent #454b53;
+    -fx-border-width: 0 0 0 3px;
+    -fx-background-radius: 0 7px 7px 0;
+}
+
 .agenda-client {
     -fx-text-fill: #eeeeee;
     -fx-font-size: 12px;

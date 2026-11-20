@@ -31,7 +31,7 @@
         <VBox alignment="CENTER_RIGHT"
               spacing="3">
 
-            <Label text="26 de setembro de 2026"
+            <Label fx:id="dateLabel"
                    styleClass="date"/>
 
             <Label text="Hoje"
@@ -79,7 +79,8 @@
             <Label text="AGENDAMENTOS HOJE"
                    styleClass="stat-label"/>
 
-            <Label text="0"
+            <Label fx:id="todayAppointmentsValue"
+                   text="0"
                    styleClass="stat-value"/>
 
             <Label text="Agendamentos previstos"
@@ -94,7 +95,8 @@
             <Label text="CLIENTES"
                    styleClass="stat-label"/>
 
-            <Label text="0"
+            <Label fx:id="clientsValue"
+                   text="0"
                    styleClass="stat-value"/>
 
             <Label text="Clientes cadastrados"
@@ -109,7 +111,8 @@
             <Label text="SERVIÇOS"
                    styleClass="stat-label"/>
 
-            <Label text="0"
+            <Label fx:id="activeServicesValue"
+                   text="0"
                    styleClass="stat-value"/>
 
             <Label text="Serviços ativos"
@@ -146,16 +149,21 @@
 
                 <Region HBox.hgrow="ALWAYS"/>
 
-                <Label text="Ver agenda"
+                <Label fx:id="viewAgendaLink"
+                       text="Ver agenda"
+                       onMouseClicked="#handleViewAgenda"
                        styleClass="panel-action"/>
 
             </HBox>
+
+            <VBox fx:id="upcomingContainer"
+                  spacing="8"/>
         </VBox>
 
 
         <!-- RESUMO DO DIA -->
 
-        <VBox styleClass="panel summary-panel"
+        <VBox styleClass="panel, summary-panel"
               spacing="20">
 
             <VBox spacing="3">
@@ -167,6 +175,9 @@
                        styleClass="panel-subtitle"/>
 
             </VBox>
+
+            <VBox fx:id="summaryContainer"
+                  spacing="12"/>
         </VBox>
     </HBox>
 </VBox>

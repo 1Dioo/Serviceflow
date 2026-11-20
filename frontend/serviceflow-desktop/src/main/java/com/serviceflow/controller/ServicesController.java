@@ -1,6 +1,8 @@
 package com.serviceflow.controller;
 import com.serviceflow.model.Appointment;
+import com.serviceflow.model.Service;
 import com.serviceflow.service.AppointmentRepository;
+import com.serviceflow.service.ServiceRepository;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,19 +29,160 @@ import java.util.Locale;
 public class ServicesController {
 
     @FXML private TextField searchField;
+    @FXML private VBox catalogContainer;
     @FXML private VBox servicesContainer;
 
     private static final Locale PT_BR =
         Locale.forLanguageTag("pt-BR");
 
+    private static final String NEW_SERVICE_VIEW =
+        "/com/serviceflow/view/NewServiceView.fxml";
+
     @FXML
     private void initialize() {
+        renderCatalog();
         renderServices();
 
         searchField.textProperty().addListener(
-            (observable, oldValue, newValue) -> renderServices()
+            (observable, oldValue, newValue) -> {
+                renderCatalog();
+                renderServices();
+            }
         );
     }
+
+    // ------------------------------------------------------------------
+    // Catálogo de serviços
+    // ------------------------------------------------------------------
+
+    @FXML
+    private void handleNewService() {
+        NewServiceController.setSelectedService(null);
+        MainController.navigateTo(NEW_SERVICE_VIEW);
+    }
+
+    private void handleEditService(Service service) {
+        NewServiceController.setSelectedService(service);
+        MainController.navigateTo(NEW_SERVICE_VIEW);
+    }
+
+    private void handleDeleteService(Service service) {
+        Alert alert = new Alert(
+            Alert.AlertType.CONFIRMATION,
+            "Deseja excluir o serviço \"" + service.getName() + "\" do catálogo? "
+                + "Os agendamentos já registrados não serão alterados.",
+            ButtonType.CANCEL,
+            ButtonType.OK
+        );
+
+        alert.setTitle("Confirmar exclusão");
+        alert.setHeaderText("Excluir serviço");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                ServiceRepository.remove(service);
+                renderCatalog();
+            }
+        });
+    }
+
+    private String currentTerm() {
+        return searchField.getText() == null
+            ? ""
+            : searchField.getText().trim().toLowerCase(PT_BR);
+    }
+
+    private void renderCatalog() {
+        catalogContainer.getChildren().clear();
+
+        String term = currentTerm();
+        boolean found = false;
+
+        for (Service service : ServiceRepository.getCatalog()) {
+            boolean matches =
+                service.getName().toLowerCase(PT_BR).contains(term)
+                || service.getCategory().toLowerCase(PT_BR).contains(term);
+
+            if (matches) {
+                catalogContainer.getChildren().add(
+                    createCatalogRow(service)
+                );
+                found = true;
+            }
+        }
+
+        if (!found) {
+            Label emptyLabel = new Label(
+                "Nenhum serviço encontrado no catálogo."
+            );
+
+            emptyLabel.getStyleClass().add("service-description");
+            emptyLabel.setWrapText(true);
+
+            catalogContainer.getChildren().add(emptyLabel);
+        }
+    }
+
+    private Node createCatalogRow(Service service) {
+        HBox row = new HBox(15);
+        row.getStyleClass().add("service-row");
+        row.setAlignment(Pos.CENTER_LEFT);
+
+        VBox info = new VBox(4);
+        info.getStyleClass().add("service-info");
+
+        Label name = new Label(service.getName());
+        name.getStyleClass().add("service-name");
+
+        Label category = new Label(
+            "Categoria: " + service.getCategory()
+        );
+        category.getStyleClass().add("service-description");
+
+        Label description = new Label(service.getDescription());
+        description.getStyleClass().add("service-description");
+        description.setWrapText(true);
+
+        info.getChildren().addAll(name, category, description);
+
+        Label duration = new Label(service.getDuration());
+        duration.getStyleClass().add("service-data");
+
+        Label price = new Label(
+            NumberFormat.getCurrencyInstance(PT_BR).format(service.getPrice())
+        );
+        price.getStyleClass().add("service-price");
+
+        Label status = new Label(service.getStatus());
+        status.getStyleClass().add("service-status");
+
+        if (!"Ativo".equalsIgnoreCase(service.getStatus())) {
+            status.getStyleClass().add("service-status-inactive");
+        }
+
+        Button editButton = new Button("Editar");
+        editButton.getStyleClass().add("small-button");
+        editButton.setOnAction(event -> handleEditService(service));
+
+        Button deleteButton = new Button("Excluir");
+        deleteButton.getStyleClass().add("small-button-danger");
+        deleteButton.setOnAction(event -> handleDeleteService(service));
+
+        HBox actions = new HBox(6, editButton, deleteButton);
+        actions.setAlignment(Pos.CENTER_RIGHT);
+
+        row.getChildren().addAll(
+            info, duration, price, status, actions
+        );
+
+        HBox.setHgrow(info, Priority.ALWAYS);
+
+        return row;
+    }
+
+    // ------------------------------------------------------------------
+    // Atendimentos agendados
+    // ------------------------------------------------------------------
 
     private void renderServices() {
         servicesContainer.getChildren().clear();
@@ -69,8 +212,8 @@ public class ServicesController {
 
         if (!found) {
             Label emptyLabel = new Label(
-                "Nenhum atendimento cadastrado. "
-                + "Os serviços aparecerão aqui após a confirmação "
+                "Nenhum atendimento agendado. "
+                + "Os atendimentos aparecerão aqui após a confirmação "
                 + "de um agendamento."
             );
 

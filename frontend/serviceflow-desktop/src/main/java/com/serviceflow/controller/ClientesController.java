@@ -1,5 +1,6 @@
 package com.serviceflow.controller;
 import com.serviceflow.model.Client;
+import com.serviceflow.service.ClientRepository;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +18,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ClientesController {
     @FXML
@@ -30,12 +29,10 @@ public class ClientesController {
     @FXML
     private VBox clientsContainer;
 
-    private final List<Client> clients = new ArrayList<>();
-
     @FXML
     private void initialize() {
         searchField.textProperty().addListener(
-            (observable, oldValue, newValue) -> filterClients(newValue)
+            (observable, oldValue, newValue) -> renderClients()
         );
 
         renderClients();
@@ -75,25 +72,23 @@ public class ClientesController {
     }
 
     private void addClient(Client client) {
-        clients.add(client);
+        ClientRepository.add(client);
         renderClients();
     }
 
+    /**
+     * Monta a lista sempre aplicando a busca atual, para que cadastro,
+     * edição e exclusão não descartem o filtro digitado.
+     */
     private void renderClients() {
         clientsContainer.getChildren().clear();
 
-        for (Client client : clients) {
-            addClientRow(client);
-        }
-
-        updateClientCount();
-    }
-
-    private void filterClients(String search) {
-        clientsContainer.getChildren().clear();
+        String search = searchField.getText();
         String query = search == null ? "" : search.trim().toLowerCase();
 
-        for (Client client : clients) {
+        int shown = 0;
+
+        for (Client client : ClientRepository.getAll()) {
             boolean matchesName =
                 client.getName()
                     .toLowerCase()
@@ -104,13 +99,13 @@ public class ClientesController {
                     .toLowerCase()
                     .contains(query);
 
-            if (matchesName || matchesPhone) {
-
+            if (query.isEmpty() || matchesName || matchesPhone) {
                 addClientRow(client);
+                shown++;
             }
         }
 
-        updateClientCount();
+        updateClientCount(shown, !query.isEmpty());
     }
 
     private void addClientRow(Client client) {
@@ -248,21 +243,27 @@ public class ClientesController {
 
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                clients.remove(client);
+                ClientRepository.remove(client);
                 renderClients();
             }
         });
     }
 
-    private void updateClientCount() {
-        int count =
-            clients.size();
+    /**
+     * Sem busca: "N clientes". Com busca ativa: "X de N clientes",
+     * onde X é a quantidade exibida na lista.
+     */
+    private void updateClientCount(int shown, boolean searching) {
+        int total = ClientRepository.count();
+
+        String suffix = (searching ? total : shown) == 1
+            ? " cliente"
+            : " clientes";
 
         clientCountLabel.setText(
-            count
-                + (count == 1
-                    ? " cliente"
-                    : " clientes")
+            searching
+                ? shown + " de " + total + suffix
+                : shown + suffix
         );
     }
 }

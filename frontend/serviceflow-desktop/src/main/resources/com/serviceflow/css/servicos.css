@@ -72,6 +72,18 @@
     -fx-alignment: CENTER;
 }
 
+.service-status-inactive {
+    -fx-text-fill: #c98282;
+    -fx-background-color: #2a1e20;
+}
+
+.services-section-title {
+    -fx-text-fill: #eeeeee;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 6px 0 0 0;
+}
+
 .service-form .text-area {
     -fx-pref-height: 100px;
     -fx-control-inner-background: #181B1F;

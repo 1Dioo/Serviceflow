@@ -1,6 +1,7 @@
 package com.serviceflow.controller;
 import com.serviceflow.model.Appointment;
 import com.serviceflow.model.Service;
+import com.serviceflow.service.AppointmentRepository;
 import com.serviceflow.service.ServiceRepository;
 
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -55,7 +57,14 @@ public class NewAppointmentController {
 
     private Appointment appointmentToEdit;
 
+    // Evita que o carregamento de um agendamento existente
+    // sobrescreva o preço salvo com o preço atual do catálogo.
+    private boolean loadingAppointment = false;
+
     private static final Locale PT_BR = Locale.forLanguageTag("pt-BR");
+
+    private static final DateTimeFormatter TIME_FORMAT =
+        DateTimeFormatter.ofPattern("HH:mm");
 
     public static void setSelectedAppointment(Appointment appointment) {
         selectedAppointment = appointment;
@@ -97,6 +106,10 @@ public class NewAppointmentController {
             "4 horas"
         );
 
+        // Categoria, duração e preço vêm do serviço selecionado.
+        categoryCombo.setDisable(true);
+        durationCombo.setDisable(true);
+
         statusCombo.getItems().setAll("Ativo", "Inativo");
         statusCombo.setValue("Ativo");
 
@@ -112,8 +125,12 @@ public class NewAppointmentController {
             }
         }
 
-        durationCombo.valueProperty().addListener(
-            (observable, oldValue, newValue) -> updatePrice(newValue)
+        serviceComboBox.valueProperty().addListener(
+            (observable, oldValue, newValue) -> {
+                if (!loadingAppointment) {
+                    applyService(newValue);
+                }
+            }
         );
 
         if (appointmentToEdit != null) {
@@ -122,16 +139,26 @@ public class NewAppointmentController {
     }
 
     private void loadAppointmentData() {
-        clientField.setText(appointmentToEdit.getCliente());
-        serviceComboBox.setValue(appointmentToEdit.getService());
-        categoryCombo.setValue(appointmentToEdit.getCategory());
-        descriptionField.setText(appointmentToEdit.getDescription());
-        durationCombo.setValue(appointmentToEdit.getDuration());
-        datePicker.setValue(appointmentToEdit.getDate());
-        timeComboBox.setValue(appointmentToEdit.getTime().toString());
-        statusCombo.setValue(appointmentToEdit.getStatus());
+        loadingAppointment = true;
 
-        updatePrice(appointmentToEdit.getDuration());
+        try {
+            clientField.setText(appointmentToEdit.getCliente());
+            serviceComboBox.setValue(appointmentToEdit.getService());
+            categoryCombo.setValue(appointmentToEdit.getCategory());
+            descriptionField.setText(appointmentToEdit.getDescription());
+            durationCombo.setValue(appointmentToEdit.getDuration());
+            datePicker.setValue(appointmentToEdit.getDate());
+            timeComboBox.setValue(
+                appointmentToEdit.getTime().format(TIME_FORMAT)
+            );
+            statusCombo.setValue(appointmentToEdit.getStatus());
+
+            // Mantém o valor combinado no agendamento original.
+            showPrice(appointmentToEdit.getPrice());
+
+        } finally {
+            loadingAppointment = false;
+        }
     }
 
     public void setSelectedDate(LocalDate date) {
@@ -140,38 +167,35 @@ public class NewAppointmentController {
         }
     }
 
-    private void updatePrice(String duration) {
-        if (duration == null) {
+    /**
+     * Preenche categoria, duração e preço a partir do serviço do catálogo.
+     */
+    private void applyService(String serviceName) {
+        Service service = ServiceRepository.findByName(serviceName);
+
+        if (service == null) {
+            categoryCombo.setValue(null);
+            durationCombo.setValue(null);
             priceField.clear();
             return;
         }
 
-        int minutes = getDurationInMinutes(duration);
+        categoryCombo.setValue(service.getCategory());
+        durationCombo.setValue(service.getDuration());
+        showPrice(service.getPrice());
+    }
 
-        if (minutes <= 0) {
-            priceField.clear();
-            return;
-        }
-
-        double price = (minutes / 60.0) * 100.0;
-
+    private void showPrice(double price) {
         NumberFormat currency =
             NumberFormat.getCurrencyInstance(PT_BR);
 
         priceField.setText(currency.format(price));
     }
 
-    private int getDurationInMinutes(String duration) {
-        switch (duration) {
-            case "30 minutos": return 30;
-            case "45 minutos": return 45;
-            case "1 hora": return 60;
-            case "1 hora e 30 minutos": return 90;
-            case "2 horas": return 120;
-            case "3 horas": return 180;
-            case "4 horas": return 240;
-            default: return 0;
-        }
+    private boolean isOriginalService(String serviceName) {
+        return appointmentToEdit != null
+            && serviceName != null
+            && serviceName.equals(appointmentToEdit.getService());
     }
 
     @FXML
@@ -198,15 +222,53 @@ public class NewAppointmentController {
             return;
         }
 
-        int minutes = getDurationInMinutes(duration);
-        double price = (minutes / 60.0) * 100.0;
+        double price;
+
+        if (isOriginalService(service)) {
+            // Serviço não mudou: preserva o preço já registrado.
+            price = appointmentToEdit.getPrice();
+        } else {
+            Service catalogService = ServiceRepository.findByName(service);
+
+            if (catalogService == null
+                    || !"Ativo".equalsIgnoreCase(catalogService.getStatus())) {
+                showMessage("O serviço selecionado não está disponível.");
+                return;
+            }
+
+            category = catalogService.getCategory();
+            duration = catalogService.getDuration();
+            price = catalogService.getPrice();
+        }
+
+        LocalTime time = LocalTime.parse(selectedTime);
+
+        int minutes = Appointment.durationToMinutes(duration);
+
+        if (minutes <= 0) {
+            minutes = 30;
+        }
+
+        Appointment conflict = AppointmentRepository.findConflict(
+            date, time, minutes, appointmentToEdit
+        );
+
+        if (conflict != null) {
+            showMessage(
+                "Horário indisponível: conflita com o agendamento de "
+                + conflict.getCliente()
+                + " (" + conflict.getTime().format(TIME_FORMAT)
+                + " às " + conflict.getEndTime().format(TIME_FORMAT) + ")."
+            );
+            return;
+        }
 
         Appointment appointment;
 
         if (appointmentToEdit == null) {
             appointment = new Appointment(
                 date,
-                LocalTime.parse(selectedTime),
+                time,
                 client,
                 service,
                 category,
@@ -219,7 +281,7 @@ public class NewAppointmentController {
             appointment = appointmentToEdit;
 
             appointment.setDate(date);
-            appointment.setTime(LocalTime.parse(selectedTime));
+            appointment.setTime(time);
             appointment.setCliente(client);
             appointment.setService(service);
             appointment.setCategory(category);

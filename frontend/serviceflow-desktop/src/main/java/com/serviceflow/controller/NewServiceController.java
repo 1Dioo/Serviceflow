@@ -25,6 +25,9 @@ public class NewServiceController {
 
     private static Service selectedService;
 
+    // Evita recalcular o preço ao carregar um serviço para edição.
+    private boolean loadingService = false;
+
     private final NumberFormat currencyFormat =
         NumberFormat.getCurrencyInstance(
             Locale.forLanguageTag("pt-BR")
@@ -60,8 +63,11 @@ public class NewServiceController {
 
         // O preço é atualizado sempre que a duração muda.
         durationCombo.valueProperty().addListener(
-            (observable, oldValue, newValue) ->
-                updatePrice(newValue)
+            (observable, oldValue, newValue) -> {
+                if (!loadingService) {
+                    updatePrice(newValue);
+                }
+            }
         );
 
         serviceToEdit = selectedService;
@@ -71,11 +77,22 @@ public class NewServiceController {
 
             titleLabel.setText("Editar serviço");
 
-            nameField.setText(serviceToEdit.getName());
-            categoryCombo.setValue(serviceToEdit.getCategory());
-            descriptionField.setText(serviceToEdit.getDescription());
-            durationCombo.setValue(serviceToEdit.getDuration());
-            statusCombo.setValue(serviceToEdit.getStatus());
+            loadingService = true;
+
+            try {
+                nameField.setText(serviceToEdit.getName());
+                categoryCombo.setValue(serviceToEdit.getCategory());
+                descriptionField.setText(serviceToEdit.getDescription());
+                durationCombo.setValue(serviceToEdit.getDuration());
+                statusCombo.setValue(serviceToEdit.getStatus());
+
+                // Mostra o preço atual do serviço, sem recalcular.
+                priceField.setText(
+                    currencyFormat.format(serviceToEdit.getPrice())
+                );
+            } finally {
+                loadingService = false;
+            }
 
         } else {
 
@@ -164,9 +181,25 @@ public class NewServiceController {
             return;
         }
 
+        // O nome identifica o serviço nos agendamentos: não pode repetir.
+        Service sameName = ServiceRepository.findByName(name);
+
+        if (sameName != null && sameName != serviceToEdit) {
+            showMessage("Já existe um serviço com esse nome.");
+            return;
+        }
+
         // O preço nunca é recebido do usuário
-        // Ele é calculado diretamente pela duração
-        double price = calculatePrice(duration);
+        // Ele é calculado diretamente pela duração.
+        // Na edição, se a duração não mudou, o preço atual é mantido.
+        double price;
+
+        if (serviceToEdit != null
+                && duration.equals(serviceToEdit.getDuration())) {
+            price = serviceToEdit.getPrice();
+        } else {
+            price = calculatePrice(duration);
+        }
 
         if (serviceToEdit == null) {
 

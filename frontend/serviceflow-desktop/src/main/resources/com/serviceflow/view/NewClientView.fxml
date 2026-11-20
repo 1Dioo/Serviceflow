@@ -12,6 +12,7 @@
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.serviceflow.controller.NewClientController"
+      stylesheets="@../css/style.css"
       styleClass="new-client-page"
       spacing="18">
 

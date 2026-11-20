@@ -134,3 +134,71 @@
 .scroll-bar .decrement-arrow {
     -fx-background-color: transparent;
 }
+
+/*
+   FORMULÁRIOS (janelas modais)
+   Base comum para os formulários abertos em janelas próprias,
+   seguindo o mesmo tema escuro de .appointment-form.
+*/
+
+.new-client-page,
+.employee-form {
+    -fx-background-color: #111315;
+}
+
+/* Áreas de texto: o conteúdo interno do TextArea precisa de fundo próprio */
+.form-text-area,
+.text-area.form-field {
+    -fx-control-inner-background: #181b1f;
+    -fx-background-color: #181b1f;
+    -fx-text-fill: #eeeeee;
+    -fx-prompt-text-fill: #626870;
+    -fx-highlight-fill: #454b53;
+    -fx-highlight-text-fill: #ffffff;
+    -fx-border-color: #30353b;
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-font-size: 12px;
+    -fx-max-width: Infinity;
+}
+
+.form-text-area .content,
+.text-area.form-field .content {
+    -fx-background-color: #181b1f;
+    -fx-background-radius: 8px;
+}
+
+.form-text-area .scroll-pane,
+.form-text-area .scroll-pane > .viewport,
+.form-text-area .scroll-pane > .corner,
+.text-area.form-field .scroll-pane,
+.text-area.form-field .scroll-pane > .viewport,
+.text-area.form-field .scroll-pane > .corner {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8px;
+}
+
+/* ComboBox e DatePicker com a mesma altura dos campos de texto */
+.combo-box.form-field,
+.date-picker.form-field {
+    -fx-padding: 0;
+}
+
+.combo-box.form-field > .list-cell {
+    -fx-padding: 9px 12px;
+}
+
+.date-picker.form-field > .date-picker-display-node {
+    -fx-padding: 9px 12px;
+}
+
+.form-text-area:focused,
+.text-area.form-field:focused {
+    -fx-border-color: #858b95;
+}
+
+/* Campos preenchidos automaticamente (somente leitura) */
+.form-field:disabled {
+    -fx-opacity: 0.75;
+}
