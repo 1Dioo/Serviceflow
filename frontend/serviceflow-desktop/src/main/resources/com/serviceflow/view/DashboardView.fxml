@@ -79,7 +79,7 @@
             <Label text="AGENDAMENTOS HOJE"
                    styleClass="stat-label"/>
 
-            <Label text="08"
+            <Label text="0"
                    styleClass="stat-value"/>
 
             <Label text="Agendamentos previstos"
@@ -94,7 +94,7 @@
             <Label text="CLIENTES"
                    styleClass="stat-label"/>
 
-            <Label text="42"
+            <Label text="0"
                    styleClass="stat-value"/>
 
             <Label text="Clientes cadastrados"
@@ -109,7 +109,7 @@
             <Label text="SERVIÇOS"
                    styleClass="stat-label"/>
 
-            <Label text="12"
+            <Label text="0"
                    styleClass="stat-value"/>
 
             <Label text="Serviços ativos"
@@ -150,85 +150,6 @@
                        styleClass="panel-action"/>
 
             </HBox>
-
-
-            <!-- AGENDAMENTO 1 -->
-
-            <HBox styleClass="appointment-row"
-                  alignment="CENTER_LEFT"
-                  spacing="15">
-
-                <Label text="10:00"
-                       styleClass="appointment-time"/>
-
-                <VBox spacing="3"
-                      HBox.hgrow="ALWAYS">
-
-                    <Label text="João Silva"
-                           styleClass="appointment-name"/>
-
-                    <Label text="Corte de cabelo"
-                           styleClass="appointment-service"/>
-
-                </VBox>
-
-                <Label text="Confirmado"
-                       styleClass="status-confirmed"/>
-
-            </HBox>
-
-
-            <!-- AGENDAMENTO 2 -->
-
-            <HBox styleClass="appointment-row"
-                  alignment="CENTER_LEFT"
-                  spacing="15">
-
-                <Label text="11:30"
-                       styleClass="appointment-time"/>
-
-                <VBox spacing="3"
-                      HBox.hgrow="ALWAYS">
-
-                    <Label text="Maria Souza"
-                           styleClass="appointment-name"/>
-
-                    <Label text="Manutenção"
-                           styleClass="appointment-service"/>
-
-                </VBox>
-
-                <Label text="Pendente"
-                       styleClass="status-pending"/>
-
-            </HBox>
-
-
-            <!-- AGENDAMENTO 3 -->
-
-            <HBox styleClass="appointment-row"
-                  alignment="CENTER_LEFT"
-                  spacing="15">
-
-                <Label text="14:00"
-                       styleClass="appointment-time"/>
-
-                <VBox spacing="3"
-                      HBox.hgrow="ALWAYS">
-
-                    <Label text="Pedro Santos"
-                           styleClass="appointment-name"/>
-
-                    <Label text="Consultoria"
-                           styleClass="appointment-service"/>
-
-                </VBox>
-
-                <Label text="Confirmado"
-                       styleClass="status-confirmed"/>
-
-            </HBox>
-
         </VBox>
 
 
@@ -246,65 +167,6 @@
                        styleClass="panel-subtitle"/>
 
             </VBox>
-
-
-            <VBox spacing="15">
-
-                <HBox>
-
-                    <Label text="Concluídos"
-                           styleClass="summary-label"/>
-
-                    <Region HBox.hgrow="ALWAYS"/>
-
-                    <Label text="04"
-                           styleClass="summary-value"/>
-
-                </HBox>
-
-
-                <HBox>
-
-                    <Label text="Pendentes"
-                           styleClass="summary-label"/>
-
-                    <Region HBox.hgrow="ALWAYS"/>
-
-                    <Label text="02"
-                           styleClass="summary-value"/>
-
-                </HBox>
-
-
-                <HBox>
-
-                    <Label text="Cancelados"
-                           styleClass="summary-label"/>
-
-                    <Region HBox.hgrow="ALWAYS"/>
-
-                    <Label text="01"
-                           styleClass="summary-value"/>
-
-                </HBox>
-
-
-                <HBox styleClass="summary-total">
-
-                    <Label text="Total hoje"
-                           styleClass="summary-total-label"/>
-
-                    <Region HBox.hgrow="ALWAYS"/>
-
-                    <Label text="08"
-                           styleClass="summary-total-value"/>
-
-                </HBox>
-
-            </VBox>
-
         </VBox>
-
     </HBox>
-
 </VBox>

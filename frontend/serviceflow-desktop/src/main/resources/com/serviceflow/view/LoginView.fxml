@@ -99,6 +99,11 @@
                     onAction="#handleRegister"
                     styleClass="register-button"/>
 
+            <Button text="Modo administrativo"
+                    fx:id="registerButton"
+                    onAction="#handleAdminMode"
+                    styleClass="register-button"/>
+
         </VBox>
 
     </VBox>

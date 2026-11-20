@@ -1,5 +1,8 @@
+
 package com.serviceflow.controller;
+
 import com.serviceflow.model.Appointment;
+import com.serviceflow.service.AppointmentRepository;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,23 +23,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class AgendaController {
-    @FXML
-    private Label dateLabel;
 
-    @FXML
-    private Label dayLabel;
-
-    @FXML
-    private VBox scheduleContainer;
+    @FXML private Label dateLabel;
+    @FXML private Label dayLabel;
+    @FXML private VBox scheduleContainer;
 
     private LocalDate selectedDate = LocalDate.now();
-
-    private final List<Appointment> appointments = new ArrayList<>();
 
     private final DateTimeFormatter dateFormatter =
         DateTimeFormatter.ofPattern(
@@ -46,7 +42,6 @@ public class AgendaController {
 
     @FXML
     private void initialize() {
-        addExampleAppointments();
         updateDate();
         renderSchedule();
     }
@@ -74,6 +69,10 @@ public class AgendaController {
 
     @FXML
     private void handleNewAppointment() {
+        openAppointmentForm(null);
+    }
+
+    private void openAppointmentForm(Appointment appointment) {
         try {
             FXMLLoader loader = new FXMLLoader(
                 getClass().getResource(
@@ -81,28 +80,42 @@ public class AgendaController {
                 )
             );
 
+            // Definir antes do load, pois initialize() é executado no load.
+            NewAppointmentController.setSelectedAppointment(appointment);
+
             Parent root = loader.load();
 
             NewAppointmentController controller =
                 loader.getController();
 
             controller.setSelectedDate(selectedDate);
-            controller.setOnAppointmentSaved(this::addAppointment);
+            controller.setOnAppointmentSaved(this::saveAppointment);
 
             Stage stage = new Stage();
-            stage.setTitle("Novo agendamento");
-            stage.setScene(new Scene(root, 420, 570));
+            stage.setTitle(
+                appointment == null
+                    ? "Novo agendamento"
+                    : "Editar agendamento"
+            );
+
+            stage.setScene(new Scene(root, 460, 780));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.showAndWait();
 
-        } catch (IOException e) {
+            renderSchedule();
+
+        } catch (IOException | RuntimeException e) {
             e.printStackTrace();
+            showError("Não foi possível abrir o formulário de agendamento.");
         }
     }
 
-    private void addAppointment(Appointment appointment) {
-        appointments.add(appointment);
+    private void saveAppointment(Appointment appointment) {
+        if (!AppointmentRepository.getAll().contains(appointment)) {
+            AppointmentRepository.add(appointment);
+        }
+
         renderSchedule();
     }
 
@@ -152,10 +165,9 @@ public class AgendaController {
         Appointment appointment = findAppointment(hour, minute);
 
         if (appointment != null) {
-            VBox appointmentBlock =
-                createAppointmentBlock(appointment);
-
-            row.getChildren().add(appointmentBlock);
+            row.getChildren().add(
+                createAppointmentBlock(appointment)
+            );
         } else {
             Region emptySpace = new Region();
 
@@ -173,7 +185,7 @@ public class AgendaController {
     private Appointment findAppointment(int hour, int minute) {
         LocalTime time = LocalTime.of(hour, minute);
 
-        for (Appointment appointment : appointments) {
+        for (Appointment appointment : AppointmentRepository.getAll()) {
             if (appointment.getDate().equals(selectedDate)
                     && appointment.getTime().equals(time)) {
                 return appointment;
@@ -196,11 +208,18 @@ public class AgendaController {
 
         Label status = new Label(appointment.getStatus());
 
-        if ("Confirmado".equals(appointment.getStatus())) {
+        if ("Ativo".equalsIgnoreCase(appointment.getStatus())
+                || "Confirmado".equalsIgnoreCase(appointment.getStatus())) {
             status.getStyleClass().add("status-confirmed");
         } else {
             status.getStyleClass().add("status-pending");
         }
+
+        Button editButton = new Button("Editar");
+        editButton.getStyleClass().add("small-button");
+        editButton.setOnAction(
+            event -> openAppointmentForm(appointment)
+        );
 
         Button deleteButton = new Button("Excluir");
         deleteButton.getStyleClass().add("small-button-danger");
@@ -208,11 +227,13 @@ public class AgendaController {
             event -> handleDeleteAppointment(appointment)
         );
 
+        HBox actions = new HBox(6, editButton, deleteButton);
+
         block.getChildren().addAll(
             client,
             service,
             status,
-            deleteButton
+            actions
         );
 
         HBox.setHgrow(
@@ -229,7 +250,7 @@ public class AgendaController {
             "Deseja excluir o agendamento de \""
                 + appointment.getCliente()
                 + "\" em "
-                + appointment.getTime().toString()
+                + appointment.getTime()
                 + "?",
             ButtonType.CANCEL,
             ButtonType.OK
@@ -240,41 +261,17 @@ public class AgendaController {
 
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                appointments.remove(appointment);
+                AppointmentRepository.remove(appointment);
                 renderSchedule();
             }
         });
     }
 
-    private void addExampleAppointments() {
-        appointments.add(
-            new Appointment(
-                LocalDate.now(),
-                LocalTime.of(9, 0),
-                "Ana Silva",
-                "Corte de cabelo",
-                "Confirmado"
-            )
-        );
-
-        appointments.add(
-            new Appointment(
-                LocalDate.now(),
-                LocalTime.of(11, 0),
-                "Bruno Oliveira",
-                "Manutenção",
-                "Pendente"
-            )
-        );
-
-        appointments.add(
-            new Appointment(
-                LocalDate.now(),
-                LocalTime.of(14, 0),
-                "Carlos Eduardo",
-                "Corte Masculino",
-                "Confirmado"
-            )
-        );
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText("Operação não realizada");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

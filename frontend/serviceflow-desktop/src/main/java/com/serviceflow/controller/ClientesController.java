@@ -34,8 +34,6 @@ public class ClientesController {
 
     @FXML
     private void initialize() {
-        addExampleClients();
-
         searchField.textProperty().addListener(
             (observable, oldValue, newValue) -> filterClients(newValue)
         );
@@ -265,44 +263,6 @@ public class ClientesController {
                 + (count == 1
                     ? " cliente"
                     : " clientes")
-        );
-    }
-
-    private void addExampleClients() {
-        clients.add(
-            new Client(
-                "Ana Silva",
-                "(88) 99999-9999",
-                "ana@email.com",
-                "Cliente desde 2026"
-            )
-        );
-
-        clients.add(
-            new Client(
-                "Bruno Oliveira",
-                "(88) 98888-8888",
-                "bruno@email.com",
-                ""
-            )
-        );
-
-        clients.add(
-            new Client(
-                "Carlos Eduardo",
-                "(88) 97777-7777",
-                "carlos@email.com",
-                ""
-            )
-        );
-
-        clients.add(
-            new Client(
-                "Maria Souza",
-                "(88) 96666-6666",
-                "maria@email.com",
-                ""
-            )
         );
     }
 }

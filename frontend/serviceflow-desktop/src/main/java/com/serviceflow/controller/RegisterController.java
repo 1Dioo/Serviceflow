@@ -1,4 +1,5 @@
 package com.serviceflow.controller;
+import com.serviceflow.service.UserRepository;
 
 import java.io.IOException;
 
@@ -13,47 +14,69 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class RegisterController {
-    @FXML 
+    @FXML
     private TextField nameField;
 
-    @FXML 
+    @FXML
     private TextField usernameField;
 
-    @FXML 
+    @FXML
     private PasswordField passwordField;
 
-    @FXML 
+    @FXML
     private PasswordField confirmPasswordField;
 
-    @FXML 
+    @FXML
     private Label messageLabel;
 
-    @FXML 
+    @FXML
     private Button registerButton;
 
-    @FXML 
+    @FXML
     private Button backButton;
 
-    @FXML 
+    @FXML
     private void handleRegister() {
-        String name = nameField.getText();
-        String username = usernameField.getText();
+        String name = nameField.getText().trim();
+        String username = usernameField.getText().trim();
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        if (name.isBlank() || username.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
+        if (name.isBlank() || username.isBlank()
+                || password.isBlank() || confirmPassword.isBlank()) {
             showMessage("Preencha todos os campos.");
             return;
         }
 
         if (!password.equals(confirmPassword)) {
-            showMessage("As senha não coincidem.");
+            showMessage("As senhas não coincidem.");
             return;
         }
-        showMessage("Conta criada com sucesso!");
+
+        if (password.length() < 8) {
+            showMessage("A senha deve possuir pelo menos 8 caracteres.");
+            return;
+        }
+
+        if (UserRepository.usernameExists(username)) {
+            showMessage("Esse nome de usuário já está em uso.");
+            return;
+        }
+
+        boolean registered = UserRepository.register(name, username, password);
+
+        if (registered) {
+            showMessage("Conta criada! Agora você já pode entrar.");
+            nameField.clear();
+            usernameField.clear();
+            passwordField.clear();
+            confirmPasswordField.clear();
+        } else {
+            showMessage("Não foi possível criar a conta.");
+        }
     }
 
-    @FXML 
+    @FXML
     private void handleBack() {
         openLoginView();
     }
@@ -67,11 +90,10 @@ public class RegisterController {
             );
 
             Parent root = loader.load();
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            Scene scene = new Scene(root, 480, 600);
 
+            Stage stage = (Stage) backButton.getScene().getWindow();
             stage.setTitle("ServiceFlow");
-            stage.setScene(scene);
+            stage.setScene(new Scene(root, 480, 600));
             stage.setResizable(false);
             stage.show();
 

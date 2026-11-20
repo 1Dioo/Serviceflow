@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.serviceflow.controller.admin.NewEmployeeController"
+      spacing="15"
+      prefWidth="500"
+      style="-fx-background-color: #ffffff; -fx-padding: 25;">
+
+    <VBox spacing="5">
+        <Label text="Novo funcionário"
+               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #202438;"/>
+
+        <Label text="Preencha as informações do profissional."
+               style="-fx-text-fill: #85899a;"/>
+    </VBox>
+
+    <Separator/>
+
+    <Label text="Nome completo"/>
+    <TextField fx:id="nameField" promptText="Nome do funcionário"/>
+
+    <Label text="Contato"/>
+    <TextField fx:id="contactField" promptText="Telefone ou e-mail"/>
+
+    <Label text="Formação / Escolaridade"/>
+    <TextField fx:id="educationField"
+               promptText="Ex.: Técnico em Desenvolvimento de Sistemas"/>
+
+    <Label text="Área de atuação"/>
+    <ComboBox fx:id="areaComboBox"
+              promptText="Selecione a área"
+              maxWidth="Infinity"/>
+
+    <Label text="Especialidades"/>
+    <TextField fx:id="specialtiesField"
+               promptText="Ex.: Sites, sistemas, aplicativos"/>
+
+    <Label text="Experiência"/>
+    <TextField fx:id="experienceField"
+               promptText="Ex.: 2 anos"/>
+
+    <Label text="Status"/>
+    <ComboBox fx:id="statusComboBox"
+              promptText="Selecione o status"
+              maxWidth="Infinity"/>
+
+    <Region VBox.vgrow="ALWAYS"/>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+
+        <Button text="Cancelar"
+                onAction="#handleCancel"
+                style="-fx-background-color: #eeeeee; -fx-padding: 12 20;"/>
+
+        <Button text="Cadastrar funcionário"
+                onAction="#handleSave"
+                style="-fx-background-color: #536dfe; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12 20;"/>
+
+    </HBox>
+
+</VBox>

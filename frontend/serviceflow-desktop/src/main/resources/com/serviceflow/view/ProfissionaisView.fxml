@@ -46,7 +46,7 @@
             <Label text="Total de profissionais"
                    styleClass="professional-stat-label"/>
             <Label fx:id="totalLabel"
-                   text="8"
+                   text="0"
                    styleClass="professional-stat-value"/>
         </VBox>
 
@@ -54,7 +54,7 @@
             <Label text="Disponíveis"
                    styleClass="professional-stat-label"/>
             <Label fx:id="availableLabel"
-                   text="6"
+                   text="0"
                    styleClass="professional-stat-value"/>
         </VBox>
     </HBox>

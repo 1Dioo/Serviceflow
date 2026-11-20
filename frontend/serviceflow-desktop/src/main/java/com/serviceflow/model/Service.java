@@ -2,13 +2,21 @@ package com.serviceflow.model;
 
 public class Service {
     private String name;
+    private String category;
     private String description;
     private String duration;
     private double price;
     private String status;
 
-    public Service(String name, String description, String duration, double price, String status) {
+    public Service(String name, String description, String duration,
+                   double price, String status) {
+        this(name, "Outros", description, duration, price, status);
+    }
+
+    public Service(String name, String category, String description,
+                   String duration, double price, String status) {
         this.name = name;
+        this.category = category;
         this.description = description;
         this.duration = duration;
         this.price = price;
@@ -16,15 +24,23 @@ public class Service {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -32,7 +48,7 @@ public class Service {
     }
 
     public String getDuration() {
-        return this.duration;
+        return duration;
     }
 
     public void setDuration(String duration) {
@@ -40,7 +56,7 @@ public class Service {
     }
 
     public double getPrice() {
-        return this.price;
+        return price;
     }
 
     public void setPrice(double price) {
@@ -48,7 +64,7 @@ public class Service {
     }
 
     public String getStatus() {
-        return this.status;
+        return status;
     }
 
     public void setStatus(String status) {

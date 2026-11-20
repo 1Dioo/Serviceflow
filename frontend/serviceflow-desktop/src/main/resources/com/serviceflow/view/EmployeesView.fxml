@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.serviceflow.controller.admin.EmployeesController"
+      spacing="22"
+      style="-fx-background-color: #f5f6fa;">
+
+    <HBox alignment="CENTER_LEFT">
+        <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <Label text="Funcionários"
+                   style="-fx-font-size: 27px; -fx-font-weight: bold; -fx-text-fill: #202438;"/>
+
+            <Label text="Gerencie os profissionais cadastrados no ServiceFlow."
+                   style="-fx-font-size: 13px; -fx-text-fill: #7d8293;"/>
+        </VBox>
+
+        <Button text="+ Novo funcionário"
+                onAction="#handleNewEmployee"
+                style="-fx-background-color: #536dfe; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12 18;"/>
+    </HBox>
+
+    <HBox spacing="15">
+        <VBox spacing="7"
+              HBox.hgrow="ALWAYS"
+              style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+            <Label text="TOTAL DE FUNCIONÁRIOS"
+                   style="-fx-text-fill: #85899a; -fx-font-size: 10px;"/>
+
+            <Label fx:id="totalLabel"
+                   text="0"
+                   style="-fx-font-size: 25px; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <VBox spacing="7"
+              HBox.hgrow="ALWAYS"
+              style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+            <Label text="FUNCIONÁRIOS ATIVOS"
+                   style="-fx-text-fill: #85899a; -fx-font-size: 10px;"/>
+
+            <Label fx:id="activeLabel"
+                   text="0"
+                   style="-fx-font-size: 25px; -fx-font-weight: bold;"/>
+        </VBox>
+    </HBox>
+
+    <TextField fx:id="searchField"
+               promptText="Pesquisar por nome ou área de atuação..."
+               onKeyReleased="#handleSearch"
+               style="-fx-padding: 12; -fx-background-radius: 8;"/>
+
+    <TableView fx:id="employeeTable"
+               VBox.vgrow="ALWAYS"
+               style="-fx-background-radius: 10;">
+
+        <columns>
+
+            <TableColumn fx:id="nameColumn"
+                         text="Nome"
+                         prefWidth="170"/>
+
+            <TableColumn fx:id="contactColumn"
+                         text="Contato"
+                         prefWidth="130"/>
+
+            <TableColumn fx:id="areaColumn"
+                         text="Área"
+                         prefWidth="120"/>
+
+            <TableColumn fx:id="educationColumn"
+                         text="Formação"
+                         prefWidth="140"/>
+
+            <TableColumn fx:id="experienceColumn"
+                         text="Experiência"
+                         prefWidth="110"/>
+
+            <TableColumn fx:id="statusColumn"
+                         text="Status"
+                         prefWidth="90"/>
+
+        </columns>
+
+        <placeholder>
+            <Label text="Nenhum funcionário cadastrado ainda."/>
+        </placeholder>
+
+    </TableView>
+
+    <HBox alignment="CENTER_RIGHT">
+        <Button text="Remover selecionado"
+                onAction="#handleRemoveEmployee"
+                style="-fx-background-color: #fff0f0; -fx-text-fill: #d94c4c; -fx-padding: 10 15;"/>
+    </HBox>
+
+</VBox>

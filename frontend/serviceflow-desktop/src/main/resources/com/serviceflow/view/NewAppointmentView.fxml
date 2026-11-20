@@ -5,7 +5,9 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/21"
@@ -15,84 +17,100 @@
       spacing="10">
 
     <padding>
-        <Insets top="25"
-                right="30"
-                bottom="25"
-                left="30"/>
+        <Insets top="25" right="30" bottom="25" left="30"/>
     </padding>
 
     <VBox spacing="4">
-
         <Label text="Novo agendamento"
                styleClass="form-title"/>
-
         <Label text="Preencha os dados do atendimento"
                styleClass="form-subtitle"/>
-
     </VBox>
 
-
     <VBox spacing="6">
-
-        <Label text="Cliente"
-               styleClass="field-label"/>
-
+        <Label text="Nome do cliente" styleClass="field-label"/>
         <TextField fx:id="clientField"
                    promptText="Nome do cliente"
                    styleClass="form-field"/>
-
     </VBox>
 
-
     <VBox spacing="6">
-
-        <Label text="Serviço"
-               styleClass="field-label"/>
-
-        <TextField fx:id="serviceField"
-                   promptText="Serviço a realizar"
-                   styleClass="form-field"/>
-
+        <Label text="Serviço" styleClass="field-label"/>
+        <ComboBox fx:id="serviceComboBox"
+                  promptText="Selecione o serviço"
+                  maxWidth="Infinity"
+                  styleClass="form-field"/>
     </VBox>
 
+    <VBox spacing="6">
+        <Label text="Categoria" styleClass="field-label"/>
+        <ComboBox fx:id="categoryCombo"
+                  promptText="Selecione a categoria"
+                  maxWidth="Infinity"
+                  styleClass="form-field"/>
+    </VBox>
 
     <VBox spacing="6">
+        <Label text="Descrição" styleClass="field-label"/>
+        <TextArea fx:id="descriptionField"
+                  promptText="Descreva o atendimento..."
+                  prefRowCount="2"
+                  wrapText="true"
+                  styleClass="form-field"/>
+    </VBox>
 
-        <Label text="Data"
-               styleClass="field-label"/>
+    <HBox spacing="10">
+        <VBox spacing="6" HBox.hgrow="ALWAYS">
+            <Label text="Duração" styleClass="field-label"/>
+            <ComboBox fx:id="durationCombo"
+                      promptText="Duração"
+                      maxWidth="Infinity"
+                      styleClass="form-field"/>
+        </VBox>
 
+        <VBox spacing="6" HBox.hgrow="ALWAYS">
+            <Label text="Preço automático" styleClass="field-label"/>
+            <TextField fx:id="priceField"
+                       promptText="R$ 0,00"
+                       editable="false"
+                       focusTraversable="false"
+                       styleClass="form-field"/>
+        </VBox>
+    </HBox>
+
+    <VBox spacing="6">
+        <Label text="Data" styleClass="field-label"/>
         <DatePicker fx:id="datePicker"
-                    styleClass="form-field"
-                    maxWidth="Infinity"/>
-
+                    maxWidth="Infinity"
+                    styleClass="form-field"/>
     </VBox>
 
-
     <VBox spacing="6">
-
-        <Label text="Horário"
-               styleClass="field-label"/>
-
+        <Label text="Horário" styleClass="field-label"/>
         <ComboBox fx:id="timeComboBox"
                   promptText="Selecione o horário"
                   maxWidth="Infinity"
                   styleClass="form-field"/>
-
     </VBox>
 
+    <VBox spacing="6">
+        <Label text="Status" styleClass="field-label"/>
+        <ComboBox fx:id="statusCombo"
+                  promptText="Selecione o status"
+                  maxWidth="Infinity"
+                  styleClass="form-field"/>
+    </VBox>
 
     <Label fx:id="messageLabel"
            styleClass="form-message"
            visible="false"
            managed="false"/>
 
-
-    <Button text="Salvar agendamento"
+    <Button text="Confirmar agendamento"
             fx:id="saveButton"
             maxWidth="Infinity"
             onAction="#handleSave"
             styleClass="primary-button"/>
-
 
     <Button text="Cancelar"
             onAction="#handleCancel"

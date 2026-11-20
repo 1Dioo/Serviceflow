@@ -1,5 +1,6 @@
 package com.serviceflow.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -37,76 +38,29 @@ public class ProfissionaisController {
     @FXML
     private Label availableLabel;
 
-    private final List<Professional> professionals = List.of(
-        new Professional(
-            "Diogo Rodrigues", "Desenvolvedor Front-end", 3,
-            "Análise e Desenvolvimento de Sistemas",
-            "React, TypeScript, CSS, JavaScript",
-            "Desenvolvimento de interfaces modernas e responsivas.",
-            "Tecnologia", "Disponível", "Ativo"
-        ),
-        new Professional(
-            "Mariana Costa", "Desenvolvedora Back-end", 4,
-            "Sistemas de Informação",
-            "Java, Spring Boot, SQL, APIs REST",
-            "Desenvolvimento de serviços e integrações.",
-            "Tecnologia", "Disponível", "Ativo"
-        ),
-        new Professional(
-            "Lucas Almeida", "Técnico de Hardware", 5,
-            "Técnico em Manutenção de Computadores",
-            "Montagem, diagnóstico, manutenção",
-            "Manutenção preventiva e corretiva de equipamentos.",
-            "Suporte", "Ocupado", "Ativo"
-        ),
-        new Professional(
-            "Beatriz Santos", "Analista de Suporte", 3,
-            "Redes de Computadores",
-            "Windows, atendimento, redes",
-            "Suporte técnico e resolução de problemas.",
-            "Suporte", "Disponível", "Ativo"
-        ),
-        new Professional(
-            "Rafael Oliveira", "Administrador de Redes", 6,
-            "Segurança da Informação",
-            "TCP/IP, roteadores, Linux",
-            "Configuração e monitoramento de redes.",
-            "Infraestrutura", "Indisponível", "Ativo"
-        ),
-        new Professional(
-            "Camila Ferreira", "Desenvolvedora Mobile", 2,
-            "Análise e Desenvolvimento de Sistemas",
-            "Flutter, Dart, Firebase",
-            "Criação de aplicativos para dispositivos móveis.",
-            "Tecnologia", "Disponível", "Ativo"
-        ),
-        new Professional(
-            "Pedro Henrique", "Analista de Segurança", 4,
-            "Segurança da Informação",
-            "Linux, monitoramento, boas práticas",
-            "Apoio à segurança e prevenção de riscos digitais.",
-            "Infraestrutura", "Indisponível", "Inativo"
-        ),
-        new Professional(
-            "Juliana Martins", "UI/UX Designer", 3,
-            "Design Digital",
-            "Figma, prototipação, acessibilidade",
-            "Criação de interfaces e experiências digitais.",
-            "Design", "Ocupado", "Ativo"
-        )
-    );
+    // Lista vazia: nenhum profissional fictício.
+    private final List<Professional> professionals = new ArrayList<>();
 
     @FXML
     private void initialize() {
+
         availabilityFilter.getItems().setAll(
-            "Todas", "Disponível", "Ocupado", "Indisponível"
+            "Todas",
+            "Disponível",
+            "Ocupado",
+            "Indisponível"
         );
+
         availabilityFilter.setValue("Todas");
 
         areaFilter.getItems().setAll(
-            "Todas", "Tecnologia", "Suporte",
-            "Infraestrutura", "Design"
+            "Todas",
+            "Tecnologia",
+            "Suporte",
+            "Infraestrutura",
+            "Design"
         );
+
         areaFilter.setValue("Todas");
 
         searchField.textProperty().addListener(
@@ -121,18 +75,27 @@ public class ProfissionaisController {
             (obs, oldValue, newValue) -> renderProfessionals()
         );
 
-        totalLabel.setText(String.valueOf(professionals.size()));
+        updateStatistics();
+        renderProfessionals();
+    }
+
+    private void updateStatistics() {
+
+        totalLabel.setText(
+            String.valueOf(professionals.size())
+        );
 
         long available = professionals.stream()
             .filter(p -> p.availability().equals("Disponível"))
             .count();
 
-        availableLabel.setText(String.valueOf(available));
-
-        renderProfessionals();
+        availableLabel.setText(
+            String.valueOf(available)
+        );
     }
 
     private void renderProfessionals() {
+
         professionalsContainer.getChildren().clear();
 
         String query = searchField.getText() == null
@@ -143,6 +106,7 @@ public class ProfissionaisController {
         String area = areaFilter.getValue();
 
         List<Professional> filtered = professionals.stream()
+
             .filter(p -> {
                 String searchable = (
                     p.name() + " " +
@@ -154,16 +118,19 @@ public class ProfissionaisController {
 
                 return searchable.contains(query);
             })
+
             .filter(p ->
                 availability == null ||
                 availability.equals("Todas") ||
                 p.availability().equals(availability)
             )
+
             .filter(p ->
                 area == null ||
                 area.equals("Todas") ||
                 p.area().equals(area)
             )
+
             .collect(Collectors.toList());
 
         for (Professional professional : filtered) {
@@ -173,17 +140,22 @@ public class ProfissionaisController {
         }
 
         if (filtered.isEmpty()) {
+
             Label empty = new Label(
-                "Nenhum profissional encontrado."
+                "Nenhum profissional cadastrado."
             );
+
             empty.getStyleClass().add("professional-empty");
+
             professionalsContainer.getChildren().add(empty);
         }
     }
 
     private VBox createProfessionalCard(Professional p) {
+
         VBox card = new VBox(12);
         card.getStyleClass().add("professional-card");
+
         card.setPrefWidth(320);
         card.setMinWidth(280);
         card.setMaxWidth(360);
@@ -212,6 +184,7 @@ public class ProfissionaisController {
         Label availability = new Label(
             "● " + p.availability()
         );
+
         availability.getStyleClass().add("professional-availability");
 
         availability.getStyleClass().add(
@@ -222,8 +195,12 @@ public class ProfissionaisController {
                     : "status-unavailable"
         );
 
-        Label profileStatus = new Label("Perfil: " + p.status());
+        Label profileStatus = new Label(
+            "Perfil: " + p.status()
+        );
+
         profileStatus.getStyleClass().add("professional-profile-status");
+
         profileStatus.getStyleClass().add(
             p.status().equals("Ativo")
                 ? "profile-active"
@@ -233,6 +210,7 @@ public class ProfissionaisController {
         Label experience = new Label(
             p.experience() + " anos de experiência"
         );
+
         experience.getStyleClass().add("professional-experience");
 
         Label educationTitle = sectionLabel("FORMAÇÃO ACADÊMICA");
@@ -246,7 +224,12 @@ public class ProfissionaisController {
         Label summary = bodyLabel(p.summary());
         summary.setWrapText(true);
 
-        HBox statusRow = new HBox(10, availability, profileStatus);
+        HBox statusRow = new HBox(
+            10,
+            availability,
+            profileStatus
+        );
+
         statusRow.setAlignment(Pos.CENTER_LEFT);
 
         Button hireButton = new Button("Contratar");
@@ -261,7 +244,12 @@ public class ProfissionaisController {
         HBox.setHgrow(profileButton, Priority.ALWAYS);
         profileButton.setOnAction(event -> showProfile(p));
 
-        HBox actions = new HBox(10, hireButton, profileButton);
+        HBox actions = new HBox(
+            10,
+            hireButton,
+            profileButton
+        );
+
         actions.setAlignment(Pos.CENTER);
 
         card.getChildren().addAll(
@@ -281,18 +269,23 @@ public class ProfissionaisController {
     }
 
     private Label sectionLabel(String text) {
+
         Label label = new Label(text);
         label.getStyleClass().add("professional-section-label");
+
         return label;
     }
 
     private Label bodyLabel(String text) {
+
         Label label = new Label(text);
         label.getStyleClass().add("professional-body-text");
+
         return label;
     }
 
     private String getInitials(String name) {
+
         String[] parts = name.trim().split("\\s+");
 
         if (parts.length == 1) {
@@ -306,58 +299,26 @@ public class ProfissionaisController {
     }
 
     private void handleHire(Professional p) {
-        if (!p.status().equals("Ativo")) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Profissional indisponível");
-            alert.setHeaderText("Este perfil está inativo");
-            alert.setContentText(
-                "No momento, não é possível iniciar uma contratação "
-                + "por meio deste perfil."
-            );
-            alert.showAndWait();
-            return;
-        }
-
-        if (!p.availability().equals("Disponível")) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Disponibilidade");
-            alert.setHeaderText(p.name());
-            alert.setContentText(
-                "Este profissional está marcado como "
-                + p.availability().toLowerCase(Locale.ROOT) + "."
-            );
-            alert.showAndWait();
-            return;
-        }
 
         Alert alert = new Alert(
-            Alert.AlertType.CONFIRMATION,
-            "Deseja demonstrar interesse em contratar "
-                + p.name() + " para a função de " + p.role() + "?",
-            ButtonType.CANCEL,
-            ButtonType.OK
+            Alert.AlertType.INFORMATION
         );
 
-        alert.setTitle("Confirmar contratação");
-        alert.setHeaderText("Confirmar interesse");
+        alert.setTitle("Contratação");
+        alert.setHeaderText("Funcionalidade indisponível");
+        alert.setContentText(
+            "O cadastro de profissionais ainda não está implementado."
+        );
 
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                Alert result = new Alert(Alert.AlertType.INFORMATION);
-                result.setTitle("Confirmação");
-                result.setHeaderText("Interesse confirmado");
-                result.setContentText(
-                    "Você confirmou interesse em " + p.name() + ".\n\n"
-                    + "Esta é uma demonstração local. "
-                    + "Nenhuma solicitação foi enviada ou salva."
-                );
-                result.showAndWait();
-            }
-        });
+        alert.showAndWait();
     }
 
     private void showProfile(Professional p) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        Alert alert = new Alert(
+            Alert.AlertType.INFORMATION
+        );
+
         alert.setTitle("Perfil profissional");
         alert.setHeaderText(p.name());
 

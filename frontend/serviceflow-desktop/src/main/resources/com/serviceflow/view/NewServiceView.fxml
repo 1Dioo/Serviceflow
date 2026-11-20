@@ -30,76 +30,59 @@
     </VBox>
 
     <VBox spacing="8">
-
-        <Label text="Nome do serviço"
-               styleClass="field-label"/>
-
+        <Label text="Nome do serviço" styleClass="field-label"/>
         <TextField fx:id="nameField"
                    promptText="Ex: Manutenção de computador"
                    styleClass="form-field"/>
-
     </VBox>
 
     <VBox spacing="8">
+        <Label text="Categoria" styleClass="field-label"/>
+        <ComboBox fx:id="categoryCombo"
+                  promptText="Selecione a categoria"
+                  maxWidth="Infinity"
+                  styleClass="form-field"/>
+    </VBox>
 
-        <Label text="Descrição"
-               styleClass="field-label"/>
-
+    <VBox spacing="8">
+        <Label text="Descrição" styleClass="field-label"/>
         <TextArea fx:id="descriptionField"
                   promptText="Descreva o serviço..."
                   styleClass="form-field"
                   prefRowCount="4"
                   wrapText="true"/>
-
     </VBox>
 
     <HBox spacing="15">
-
-        <VBox spacing="8"
-              HBox.hgrow="ALWAYS">
-
-            <Label text="Duração"
-                   styleClass="field-label"/>
-
+        <VBox spacing="8" HBox.hgrow="ALWAYS">
+            <Label text="Duração" styleClass="field-label"/>
             <ComboBox fx:id="durationCombo"
                       promptText="Selecione a duração"
                       maxWidth="Infinity"
                       styleClass="form-field"/>
-
         </VBox>
 
-        <VBox spacing="8"
-              HBox.hgrow="ALWAYS">
-
-            <Label text="Preço"
-                   styleClass="field-label"/>
-
+        <VBox spacing="8" HBox.hgrow="ALWAYS">
+            <Label text="Preço automático" styleClass="field-label"/>
             <TextField fx:id="priceField"
-                       promptText="Ex: R$ 120,00"
+                       promptText="Escolha uma duração"
+                       editable="false"
+                       focusTraversable="false"
                        styleClass="form-field"/>
-
         </VBox>
-
     </HBox>
 
     <VBox spacing="8">
-
-        <Label text="Status"
-               styleClass="field-label"/>
-
+        <Label text="Status" styleClass="field-label"/>
         <ComboBox fx:id="statusCombo"
                   promptText="Selecione o status"
                   maxWidth="300"
                   styleClass="form-field"/>
-
     </VBox>
 
-    <Label fx:id="messageLabel"
-           styleClass="form-message"/>
+    <Label fx:id="messageLabel" styleClass="form-message"/>
 
-    <HBox spacing="10"
-          alignment="CENTER_RIGHT">
-
+    <HBox spacing="10" alignment="CENTER_RIGHT">
         <Button text="Cancelar"
                 styleClass="secondary-button"
                 onAction="#handleCancel"/>
@@ -107,7 +90,6 @@
         <Button text="Salvar serviço"
                 styleClass="primary-button"
                 onAction="#handleSave"/>
-
     </HBox>
 
 </VBox>
