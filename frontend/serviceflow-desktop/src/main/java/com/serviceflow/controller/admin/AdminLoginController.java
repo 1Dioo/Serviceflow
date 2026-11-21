@@ -2,6 +2,8 @@ package com.serviceflow.controller.admin;
 
 import com.serviceflow.controller.LoginController;
 import com.serviceflow.model.User;
+import com.serviceflow.service.AdminAccountConfig;
+import com.serviceflow.service.LoginAttemptService;
 import com.serviceflow.service.UserRepository;
 
 import javafx.fxml.FXML;
@@ -15,6 +17,8 @@ import javafx.stage.Window;
 /**
  * Tela de autenticação do modo administrativo.
  * Só contas com perfil ADMIN conseguem acessar o painel.
+ * Sem configuração administrativa válida, a tela informa o estado
+ * e bloqueia a autenticação.
  */
 public class AdminLoginController {
 
@@ -33,8 +37,32 @@ public class AdminLoginController {
     @FXML
     private Button cancelButton;
 
+    static final String NOT_CONFIGURED_MESSAGE =
+        "Modo administrativo não configurado. Defina uma senha de pelo menos "
+        + AdminAccountConfig.MIN_PASSWORD_LENGTH + " caracteres em "
+        + AdminAccountConfig.PASSWORD_ENV + " ou -D"
+        + AdminAccountConfig.PASSWORD_PROPERTY
+        + " e reinicie o ServiceFlow.";
+
+    @FXML
+    private void initialize() {
+        if (!UserRepository.isAdminConfigured()) {
+            usernameField.setDisable(true);
+            passwordField.setDisable(true);
+            loginButton.setDisable(true);
+            loginButton.setDefaultButton(false);
+            showMessage(NOT_CONFIGURED_MESSAGE);
+        }
+    }
+
     @FXML
     private void handleLogin() {
+        if (!UserRepository.isAdminConfigured()) {
+            passwordField.clear();
+            showMessage(NOT_CONFIGURED_MESSAGE);
+            return;
+        }
+
         String username = usernameField.getText() == null
             ? "" : usernameField.getText().trim();
         String password = passwordField.getText() == null
@@ -45,14 +73,24 @@ public class AdminLoginController {
             return;
         }
 
-        User admin = UserRepository.authenticateAdmin(username, password);
+        LoginAttemptService.Result result = LoginAttemptService.shared().attempt(
+            LoginAttemptService.Channel.ADMIN,
+            username,
+            () -> UserRepository.authenticateAdmin(username, password)
+        );
 
-        if (admin == null) {
+        if (result.status() != LoginAttemptService.Status.SUCCESS) {
             passwordField.clear();
             passwordField.requestFocus();
-            showMessage("Credenciais administrativas inválidas.");
+            showMessage(
+                result.status() == LoginAttemptService.Status.LOCKED
+                    ? LoginAttemptService.lockMessage(result.lockRemaining())
+                    : "Credenciais administrativas inválidas."
+            );
             return;
         }
+
+        User admin = result.user();
 
         Stage dialog = (Stage) loginButton.getScene().getWindow();
         Window owner = dialog.getOwner();

@@ -3,6 +3,7 @@ package com.serviceflow.controller;
 
 import com.serviceflow.model.Appointment;
 import com.serviceflow.service.AppointmentRepository;
+import com.serviceflow.service.BusinessHours;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -140,12 +141,9 @@ public class AgendaController {
     private void renderSchedule() {
         scheduleContainer.getChildren().clear();
 
-        for (int hour = 8; hour <= 18; hour++) {
-            addTimeRow(hour, 0);
-
-            if (hour < 18) {
-                addTimeRow(hour, 30);
-            }
+        // Grade do expediente: da abertura ao fechamento (ver BusinessHours).
+        for (LocalTime row : BusinessHours.agendaRows()) {
+            addTimeRow(row.getHour(), row.getMinute());
         }
     }
 

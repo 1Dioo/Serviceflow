@@ -3,88 +3,108 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!--
+    Painel administrativo: mesma estrutura visual da janela principal
+    (MainView): barra lateral .sidebar, itens .nav-item e área de conteúdo
+    escura, sem moldura clara em volta das telas.
+-->
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.serviceflow.controller.admin.AdminMainController"
             prefWidth="1200"
             prefHeight="750"
-            style="-fx-background-color: #f5f6fa;">
+            stylesheets="@../css/style.css"
+            styleClass="app">
 
     <left>
-        <VBox prefWidth="245"
-              spacing="15"
-              style="-fx-background-color: #171923; -fx-padding: 25;">
+        <VBox styleClass="sidebar">
 
-            <VBox spacing="5">
+            <VBox spacing="3"
+                  styleClass="logo-area">
+
                 <Label text="ServiceFlow"
-                       style="-fx-text-fill: white; -fx-font-size: 25px; -fx-font-weight: bold;"/>
+                       styleClass="logo"/>
 
-                <Label text="PAINEL ADMINISTRATIVO"
-                       style="-fx-text-fill: #8b91a5; -fx-font-size: 10px;"/>
+                <Label text="Painel administrativo"
+                       styleClass="logo-subtitle"/>
+
             </VBox>
 
-            <Separator style="-fx-opacity: 0.25;"/>
+            <VBox spacing="6"
+                  styleClass="nav">
 
-            <Label text="GERENCIAMENTO"
-                   style="-fx-text-fill: #737b91; -fx-font-size: 10px; -fx-font-weight: bold;"/>
+                <Label text="GERENCIAMENTO"
+                       styleClass="nav-section-label"/>
 
-            <Button text="Dashboard"
-                    onAction="#showDashboard"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: #292e40; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 12;"/>
+                <Button fx:id="dashboardButton"
+                        text="Dashboard"
+                        onAction="#showDashboard"
+                        styleClass="nav-item"/>
 
-            <Button text="Agenda"
-                    onAction="#showAgenda"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: #d1d5e2; -fx-alignment: CENTER_LEFT; -fx-padding: 12;"/>
+                <Button fx:id="agendaButton"
+                        text="Agenda"
+                        onAction="#showAgenda"
+                        styleClass="nav-item"/>
 
-            <Button text="Clientes"
-                    onAction="#showClients"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: #d1d5e2; -fx-alignment: CENTER_LEFT; -fx-padding: 12;"/>
+                <Button fx:id="clientsButton"
+                        text="Clientes"
+                        onAction="#showClients"
+                        styleClass="nav-item"/>
 
-            <Button text="Serviços"
-                    onAction="#showServices"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: #d1d5e2; -fx-alignment: CENTER_LEFT; -fx-padding: 12;"/>
+                <Button fx:id="servicesButton"
+                        text="Serviços"
+                        onAction="#showServices"
+                        styleClass="nav-item"/>
 
-            <Separator style="-fx-opacity: 0.25;"/>
+                <Label text="ADMINISTRAÇÃO"
+                       styleClass="nav-section-label"/>
 
-            <Label text="ADMINISTRAÇÃO"
-                   style="-fx-text-fill: #737b91; -fx-font-size: 10px; -fx-font-weight: bold;"/>
+                <Button fx:id="employeesButton"
+                        text="Funcionários"
+                        onAction="#showEmployees"
+                        styleClass="nav-item"/>
 
-            <Button text="Funcionários"
-                    onAction="#showEmployees"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: #d1d5e2; -fx-alignment: CENTER_LEFT; -fx-padding: 12;"/>
+                <Button fx:id="reportsButton"
+                        text="Relatórios"
+                        onAction="#showReports"
+                        styleClass="nav-item"/>
 
-            <Button text="Relatórios"
-                    onAction="#showReports"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: #d1d5e2; -fx-alignment: CENTER_LEFT; -fx-padding: 12;"/>
+                <Button fx:id="settingsButton"
+                        text="Configurações"
+                        onAction="#showSettings"
+                        styleClass="nav-item"/>
 
-            <Button text="Configurações"
-                    onAction="#showSettings"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: transparent; -fx-text-fill: #d1d5e2; -fx-alignment: CENTER_LEFT; -fx-padding: 12;"/>
+            </VBox>
 
             <Region VBox.vgrow="ALWAYS"/>
 
-            <Separator style="-fx-opacity: 0.25;"/>
+            <VBox spacing="8"
+                  styleClass="sidebar-footer">
 
-            <Label text="MODO ADMINISTRADOR"
-                   style="-fx-text-fill: #a5aabd; -fx-font-size: 11px;"/>
+                <Button text="Sair da conta"
+                        onAction="#handleLogout"
+                        maxWidth="Infinity"
+                        styleClass="sidebar-logout"/>
 
-            <Button text="Sair da conta"
-                    onAction="#handleLogout"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: #39252b; -fx-text-fill: #ff929d; -fx-padding: 12;"/>
+                <VBox spacing="2"
+                      styleClass="sidebar-info">
+
+                    <Label text="ServiceFlow"
+                           styleClass="sidebar-info-title"/>
+
+                    <Label text="Modo administrador"
+                           styleClass="sidebar-info-text"/>
+
+                </VBox>
+
+            </VBox>
+
         </VBox>
     </left>
 
     <center>
         <StackPane fx:id="contentArea"
-                   style="-fx-padding: 30;"/>
+                   styleClass="content-area"/>
     </center>
 
 </BorderPane>

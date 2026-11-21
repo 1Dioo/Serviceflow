@@ -1,5 +1,6 @@
 package com.serviceflow.controller;
 import com.serviceflow.model.Client;
+import com.serviceflow.service.AppointmentRepository;
 import com.serviceflow.service.ClientRepository;
 
 import javafx.fxml.FXML;
@@ -231,6 +232,13 @@ public class ClientesController {
 
     
     private void handleDeleteClient(Client client) {
+        int linked = AppointmentRepository.countByClient(client);
+
+        if (linked > 0) {
+            showDeletionBlocked(client, linked);
+            return;
+        }
+
         Alert alert = new Alert(
             Alert.AlertType.CONFIRMATION,
             "Deseja excluir o cliente \"" + client.getName() + "\"?",
@@ -242,11 +250,42 @@ public class ClientesController {
         alert.setHeaderText("Excluir cliente");
 
         alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                ClientRepository.remove(client);
-                renderClients();
+            if (response != ButtonType.OK) {
+                return;
             }
+
+            // A regra também é verificada no repositório, caso um
+            // agendamento tenha sido vinculado enquanto o alerta estava aberto.
+            ClientRepository.RemovalResult result = ClientRepository.remove(client);
+
+            if (result == ClientRepository.RemovalResult.HAS_APPOINTMENTS) {
+                showDeletionBlocked(client, AppointmentRepository.countByClient(client));
+            }
+
+            renderClients();
         });
+    }
+
+    /**
+     * Clientes com agendamentos não são excluídos: os agendamentos
+     * ficariam sem cliente ou teriam de ser apagados sem aviso.
+     */
+    private void showDeletionBlocked(Client client, int linked) {
+        String appointments = linked == 1
+            ? "1 agendamento vinculado"
+            : linked + " agendamentos vinculados";
+
+        Alert alert = new Alert(
+            Alert.AlertType.WARNING,
+            "O cliente \"" + client.getName() + "\" possui " + appointments
+                + ". Exclua os agendamentos ou altere o cliente deles "
+                + "antes de excluir este cadastro.",
+            ButtonType.OK
+        );
+
+        alert.setTitle("Exclusão não permitida");
+        alert.setHeaderText("Cliente com agendamentos");
+        alert.showAndWait();
     }
 
     /**

@@ -7,7 +7,9 @@ public class Appointment {
     private LocalDate date;
     private LocalTime time;
 
-    private String cliente;
+    // Cliente cadastrado ao qual o atendimento pertence. A referência
+    // acompanha as edições do cadastro (nome, telefone...).
+    private Client client;
     private String service;
     private String category;
     private String description;
@@ -15,11 +17,11 @@ public class Appointment {
     private double price;
     private String status;
 
-    public Appointment(LocalDate date, LocalTime time, String cliente, String service,
+    public Appointment(LocalDate date, LocalTime time, Client client, String service,
             String category, String description, String duration, double price, String status) {
         this.date = date;
         this.time = time;
-        this.cliente = cliente;
+        this.client = client;
         this.service = service;
         this.category = category;
         this.description = description;
@@ -93,12 +95,28 @@ public class Appointment {
         this.time = time;
     }
 
-    public String getCliente() {
-        return cliente;
+    public Client getClient() {
+        return client;
     }
 
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    /** Identificação do cliente vinculado, ou null se não houver. */
+    public String getClientId() {
+        return client == null ? null : client.getId();
+    }
+
+    /** Nome atual do cliente vinculado, para exibição. */
+    public String getCliente() {
+        return client == null ? "" : client.getName();
+    }
+
+    /** Indica se o agendamento pertence ao cliente (pela identificação). */
+    public boolean belongsTo(Client other) {
+        return client != null && other != null
+            && client.getId().equals(other.getId());
     }
 
     public String getService() {

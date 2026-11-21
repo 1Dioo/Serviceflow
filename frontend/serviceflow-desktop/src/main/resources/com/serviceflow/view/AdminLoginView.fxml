@@ -73,6 +73,8 @@
 
         <Label fx:id="messageLabel"
                styleClass="login-message"
+               wrapText="true"
+               maxWidth="Infinity"
                visible="false"
                managed="false"/>
 

@@ -29,10 +29,11 @@
     </VBox>
 
     <VBox spacing="6">
-        <Label text="Nome do cliente" styleClass="field-label"/>
-        <TextField fx:id="clientField"
-                   promptText="Nome do cliente"
-                   styleClass="form-field"/>
+        <Label text="Cliente" styleClass="field-label"/>
+        <ComboBox fx:id="clientComboBox"
+                  promptText="Selecione o cliente"
+                  maxWidth="Infinity"
+                  styleClass="form-field"/>
     </VBox>
 
     <VBox spacing="6">

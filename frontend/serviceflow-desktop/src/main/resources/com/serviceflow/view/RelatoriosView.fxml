@@ -21,7 +21,7 @@
     <content>
         <VBox spacing="24" styleClass="reports-page">
             <padding>
-                <Insets top="30" right="32" bottom="30" left="32"/>
+                <Insets top="28" right="28" bottom="28" left="28"/>
             </padding>
 
             <VBox spacing="6">

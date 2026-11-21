@@ -31,32 +31,37 @@
 
             <!-- MENU -->
             <VBox spacing="6"
-                  styleClass="menu">
+                  styleClass="nav">
 
-                <Label text="Dashboard"
+                <Label fx:id="dashboardMenuItem"
+                       text="Dashboard"
                        onMouseClicked="#handleDashboard"
-                       styleClass="menu-item"/>
+                       styleClass="nav-item"/>
 
-                <Label text="Agenda"
+                <Label fx:id="agendaMenuItem"
+                       text="Agenda"
                        onMouseClicked="#handleAgenda"
-                       styleClass="menu-item"/>
+                       styleClass="nav-item"/>
 
-                <Label text="Clientes"
+                <Label fx:id="clientsMenuItem"
+                       text="Clientes"
                        onMouseClicked="#handleClientes"
-                       styleClass="menu-item"/>
+                       styleClass="nav-item"/>
 
-                <Label text="Serviços"
+                <Label fx:id="servicesMenuItem"
+                       text="Serviços"
                        onMouseClicked="#handleServicos"
-                       styleClass="menu-item"/>
+                       styleClass="nav-item"/>
 
-                <Label text="Profissionais"
+                <Label fx:id="professionalsMenuItem"
+                       text="Profissionais"
                        onMouseClicked="#handleProfissionais"
-                       styleClass="menu-item"/>
+                       styleClass="nav-item"/>
 
                 <Label fx:id="reportsMenuItem"
                        text="Relatórios"
                        onMouseClicked="#handleRelatorios"
-                       styleClass="menu-item"/>
+                       styleClass="nav-item"/>
 
             </VBox>
 
@@ -70,13 +75,13 @@
                 <Label fx:id="settingsMenuItem"
                        text="Configurações"
                        onMouseClicked="#handleSettings"
-                       styleClass="menu-item"/>
+                       styleClass="nav-item"/>
 
                 <!-- SAIR DA CONTA -->
                 <Button text="Sair da conta"
                         onAction="#handleLogout"
                         maxWidth="Infinity"
-                        styleClass="register-button"/>
+                        styleClass="sidebar-logout"/>
 
                 <!-- INFORMAÇÕES -->
                 <VBox spacing="2"
@@ -85,7 +90,7 @@
                     <Label text="ServiceFlow"
                            styleClass="sidebar-info-title"/>
 
-                    <Label text="v3.3 • Em desenvolvimento"
+                    <Label text="v3.6.1 • Em desenvolvimento"
                            styleClass="sidebar-info-text"/>
 
                 </VBox>

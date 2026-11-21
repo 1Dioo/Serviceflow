@@ -1,36 +1,152 @@
+/*
+   BASE DO TEMA DO SERVICEFLOW
+
+   Paleta central (cores "looked-up" do JavaFX). Todas as folhas de estilo
+   usam estes nomes em vez de valores fixos; para ajustar uma cor do tema,
+   altere apenas aqui.
+
+   Contraste (WCAG): textos principais, secundários e "muted" ficam acima
+   de 4.5:1 sobre as superfícies; o texto branco sobre o azul de destaque
+   também (aprox. 4.9:1).
+*/
+
+.root {
+    /* Fundos e superfícies */
+    -sf-bg-deep: #0b0d0f;            /* barra lateral e fundo do login   */
+    -sf-bg: #111315;                 /* fundo das páginas                */
+    -sf-surface: #181b1f;            /* cartões, painéis e campos        */
+    -sf-surface-hover: #1d2125;      /* cartões/linhas em hover, cabeçalhos */
+    -sf-surface-alt: #20242a;        /* linhas internas, botões secundários */
+    -sf-surface-alt-hover: #252a30;  /* hover das linhas internas, item ativo */
+    -sf-control-hover: #292e34;      /* hover de botões e listas         */
+    -sf-control-active: #30353b;     /* item selecionado em listas       */
+
+    /* Bordas */
+    -sf-border: #292e34;             /* cartões e divisórias             */
+    -sf-border-strong: #30353b;      /* campos e botões                  */
+    -sf-border-hover: #454b53;
+
+    /* Textos */
+    -sf-white: #ffffff;
+    -sf-text-strong: #f5f5f5;        /* títulos                          */
+    -sf-text: #eeeeee;               /* texto principal                  */
+    -sf-text-soft: #d5d8dc;
+    -sf-text-secondary: #c8ccd1;     /* rótulos                          */
+    -sf-text-muted: #858b95;         /* descrições                       */
+    -sf-text-subtle: #7f858f;        /* textos auxiliares pequenos       */
+    -sf-text-placeholder: #6b717a;
+
+    /* Destaque (azul) */
+    -sf-accent: #2f6fd0;
+    -sf-accent-hover: #2a63bb;
+    -sf-accent-pressed: #24569f;
+    -sf-accent-soft: #1a2a40;        /* fundo de seleção                 */
+    -sf-focus: #4b8be8;              /* borda de foco                    */
+
+    /* Estados */
+    -sf-success: #78c99a;
+    -sf-success-bg: #193326;
+    -sf-warning: #d7ad5c;
+    -sf-warning-bg: #352c1a;
+    -sf-danger: #c98282;
+    -sf-danger-hover: #e39a9a;
+    -sf-danger-strong: #ff7777;
+    -sf-danger-bg: #211a1b;
+    -sf-danger-bg-hover: #2a1e20;
+    -sf-danger-border: #382628;
+    -sf-danger-border-hover: #513034;
+
+    /*
+       Base escura para os controles padrão do JavaFX (Modena): tabelas,
+       calendário do DatePicker, listas e barras de rolagem sem estilo
+       próprio passam a seguir o tema, sem fundos claros.
+    */
+    -fx-base: #20242a;
+    -fx-background: #111315;
+    -fx-control-inner-background: #181b1f;
+    -fx-control-inner-background-alt: #1b1e23;
+    -fx-accent: #2f6fd0;
+    -fx-focus-color: #4b8be8;
+    -fx-faint-focus-color: transparent;
+    -fx-selection-bar: #1a2a40;
+    -fx-selection-bar-non-focused: #20242a;
+    -fx-selection-bar-text: #eeeeee;
+    -fx-text-base-color: #eeeeee;
+    -fx-text-background-color: #eeeeee;
+    -fx-text-inner-color: #eeeeee;
+    -fx-prompt-text-fill: #6b717a;
+    -fx-box-border: #30353b;
+    -fx-text-box-border: #30353b;
+}
+
+/* ------------------------------------------------------------------
+   LAYOUT DA JANELA
+   ------------------------------------------------------------------ */
 
 .app {
-    -fx-background-color: #111315;
+    -fx-background-color: -sf-bg;
     -fx-min-width: 0;
     -fx-min-height: 0;
 }
 
 .content-area {
-    -fx-background-color: #111315;
+    -fx-background-color: -sf-bg;
     -fx-min-width: 0;
     -fx-min-height: 0;
 }
 
+/* ------------------------------------------------------------------
+   TIPOGRAFIA
+   Hierarquia: título da página 26 · título de formulário 20 ·
+   título de seção/painel 16 · texto 12–13 · auxiliar 11 · legenda 10
+   ------------------------------------------------------------------ */
+
 .page-title {
-    -fx-text-fill: #f5f5f5;
+    -fx-text-fill: -sf-text-strong;
     -fx-font-size: 26px;
     -fx-font-weight: bold;
     -fx-wrap-text: true;
 }
 
 .page-subtitle {
-    -fx-text-fill: #858b95;
+    -fx-text-fill: -sf-text-muted;
     -fx-font-size: 13px;
     -fx-wrap-text: true;
 }
 
 .date {
-    -fx-text-fill: #d5d8dc;
+    -fx-text-fill: -sf-text-soft;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
 
 .date-label {
-    -fx-text-fill: #70757e;
+    -fx-text-fill: -sf-text-subtle;
     -fx-font-size: 12px;
+}
+
+/* ------------------------------------------------------------------
+   PAINEL ADMINISTRATIVO
+   ------------------------------------------------------------------ */
+
+/* Página inicial do painel: mesmo espaçamento das demais páginas */
+.admin-home {
+    -fx-background-color: -sf-bg;
+    -fx-padding: 28px;
+    -fx-alignment: TOP_LEFT;
+}
+
+/* Aviso exibido quando o painel é aberto sem perfil ADMIN */
+.restricted-message {
+    -fx-text-fill: -sf-danger-strong;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+
+/* Funcionários (tela do painel) */
+.employees-page {
+    -fx-background-color: -sf-bg;
+    -fx-padding: 28px;
+    -fx-min-width: 0;
 }

@@ -1,47 +1,373 @@
-.primary-button {
-    -fx-background-color: #eeeeee;
-    -fx-text-fill: #111315;
+/*
+   COMPONENTES PADRÃO DO SERVICEFLOW
+   Botões, campos, listas, tabelas e estados (foco, hover, seleção,
+   desabilitado). As telas reutilizam estas classes; as folhas de cada
+   tela só acrescentam o que é específico delas.
+*/
+
+/* ------------------------------------------------------------------
+   BOTÕES
+   Mesma altura, raio e tipografia: primário (azul), secundário
+   (cancelar/voltar), perigo (excluir) e pequenos (ações em linhas).
+   ------------------------------------------------------------------ */
+
+.primary-button,
+.secondary-button,
+.danger-button {
     -fx-background-radius: 8px;
-    -fx-padding: 11px 16px;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-padding: 10px 16px;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-cursor: hand;
+}
+
+.primary-button {
+    -fx-background-color: -sf-accent;
+    -fx-border-color: -sf-accent;
+    -fx-text-fill: -sf-white;
 }
 
 .primary-button:hover {
-    -fx-background-color: #ffffff;
+    -fx-background-color: -sf-accent-hover;
+    -fx-border-color: -sf-accent-hover;
+}
+
+.primary-button:pressed {
+    -fx-background-color: -sf-accent-pressed;
+    -fx-border-color: -sf-accent-pressed;
 }
 
 .secondary-button {
-    -fx-background-color: #20242a;
-    -fx-text-fill: #d5d8dc;
-    -fx-border-color: #30353b;
-    -fx-border-radius: 7px;
-    -fx-background-radius: 7px;
-    -fx-padding: 9px 16px;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
+    -fx-background-color: -sf-surface-alt;
+    -fx-border-color: -sf-border-strong;
+    -fx-text-fill: -sf-text-soft;
 }
 
 .secondary-button:hover {
-    -fx-background-color: #292e34;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: -sf-control-hover;
+    -fx-border-color: -sf-border-hover;
+    -fx-text-fill: -sf-white;
 }
 
-.date-toolbar {
-    -fx-background-color: #181b1f;
+.secondary-button:pressed {
+    -fx-background-color: -sf-surface-hover;
+}
+
+.danger-button {
+    -fx-background-color: -sf-danger-bg;
+    -fx-border-color: -sf-danger-border;
+    -fx-text-fill: -sf-danger;
+}
+
+.danger-button:hover {
+    -fx-background-color: -sf-danger-bg-hover;
+    -fx-border-color: -sf-danger-border-hover;
+    -fx-text-fill: -sf-danger-hover;
+}
+
+/* Botões pequenos usados nas linhas (Editar / Excluir) */
+.small-button,
+.small-button-danger {
+    -fx-border-width: 1px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 6px 10px;
+    -fx-font-size: 11px;
+    -fx-cursor: hand;
+}
+
+.small-button {
+    -fx-background-color: -sf-surface-alt;
+    -fx-text-fill: -sf-text-soft;
+    -fx-border-color: -sf-border-strong;
+}
+
+.small-button:hover {
+    -fx-background-color: -sf-control-hover;
+    -fx-text-fill: -sf-white;
+    -fx-border-color: -sf-border-hover;
+}
+
+.small-button-danger {
+    -fx-background-color: -sf-danger-bg;
+    -fx-text-fill: -sf-danger;
+    -fx-border-color: -sf-danger-border;
+}
+
+.small-button-danger:hover {
+    -fx-background-color: -sf-danger-bg-hover;
+    -fx-text-fill: -sf-danger-hover;
+    -fx-border-color: -sf-danger-border-hover;
+}
+
+/* Estado desabilitado comum a botões e campos */
+.button:disabled,
+.text-input:disabled,
+.combo-box-base:disabled {
+    -fx-opacity: 0.55;
+}
+
+/* Foco por teclado em botões: anel azul discreto */
+.primary-button:focused,
+.secondary-button:focused,
+.danger-button:focused,
+.small-button:focused,
+.small-button-danger:focused {
+    -fx-border-color: -sf-focus;
+}
+
+/* ------------------------------------------------------------------
+   CAMPOS (TextField, PasswordField, TextArea, ComboBox, DatePicker)
+   ------------------------------------------------------------------ */
+
+.text-field,
+.text-area {
+    -fx-background-color: -sf-surface;
+    -fx-text-fill: -sf-text;
+    -fx-prompt-text-fill: -sf-text-placeholder;
+    -fx-highlight-fill: -sf-accent;
+    -fx-highlight-text-fill: -sf-white;
+    -fx-border-color: -sf-border-strong;
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+.text-field:focused,
+.text-area:focused,
+.combo-box-base:focused {
+    -fx-border-color: -sf-focus;
+}
+
+/* ComboBox e DatePicker: mesma altura e aparência dos campos de texto */
+.combo-box-base {
+    -fx-background-color: -sf-surface;
+    -fx-border-color: -sf-border-strong;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0;
+}
+
+/*
+   Classes de campo de texto (.form-field, .search-field...) também são
+   usadas em ComboBox/DatePicker; nesses controles o espaçamento fica na
+   célula interna, por isso a moldura externa não recebe padding.
+*/
+.combo-box-base.form-field,
+.combo-box-base.professional-combo {
+    -fx-padding: 0;
+}
+
+.combo-box-base:hover {
+    -fx-border-color: -sf-border-hover;
+}
+
+.combo-box-base:focused {
+    -fx-border-color: -sf-focus;
+}
+
+.combo-box > .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -sf-text;
+    -fx-padding: 9px 12px;
+}
+
+.combo-box-base > .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 12px 0 6px;
+}
+
+.combo-box-base > .arrow-button > .arrow {
+    -fx-background-color: -sf-text-secondary;
+}
+
+/* O campo interno do DatePicker não tem moldura própria */
+.date-picker > .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: -sf-text;
+    -fx-padding: 9px 12px;
+}
+
+.date-picker > .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.date-picker > .arrow-button:hover {
+    -fx-background-color: -sf-control-hover;
+    -fx-background-radius: 0 8px 8px 0;
+}
+
+.date-picker > .arrow-button > .arrow {
+    -fx-background-color: -sf-text-secondary;
+}
+
+/* Listas suspensas (ComboBox) */
+.combo-box-popup > .list-view {
+    -fx-background-color: -sf-surface;
+    -fx-border-color: -sf-border-strong;
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 4px;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -sf-text;
+    -fx-padding: 8px 10px;
+    -fx-background-radius: 6px;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
+    -fx-background-color: -sf-control-hover;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected {
+    -fx-background-color: -sf-accent-soft;
+    -fx-text-fill: -sf-white;
+}
+
+/* Calendário do DatePicker */
+.date-picker-popup {
+    -fx-background-color: -sf-surface;
+    -fx-border-color: -sf-border-strong;
+}
+
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: -sf-surface-alt;
+}
+
+.date-picker-popup .spinner .label {
+    -fx-text-fill: -sf-text;
+    -fx-font-weight: bold;
+}
+
+.date-picker-popup .day-name-cell,
+.date-picker-popup .week-number-cell {
+    -fx-text-fill: -sf-text-muted;
+}
+
+.date-picker-popup .date-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -sf-text;
+}
+
+.date-picker-popup .date-cell:hover {
+    -fx-background-color: -sf-control-hover;
+}
+
+.date-picker-popup .today {
+    -fx-border-color: -sf-focus;
+    -fx-border-width: 1px;
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: -sf-accent;
+    -fx-text-fill: -sf-white;
+}
+
+.date-picker-popup .previous-month,
+.date-picker-popup .next-month {
+    -fx-text-fill: -sf-text-placeholder;
+}
+
+/* ------------------------------------------------------------------
+   TABELAS (TableView)
+   ------------------------------------------------------------------ */
+
+.table-view {
+    -fx-background-color: -sf-surface;
+    -fx-border-color: -sf-border;
+    -fx-border-width: 1px;
     -fx-background-radius: 10px;
-    -fx-border-color: #292e34;
     -fx-border-radius: 10px;
+    -fx-padding: 0;
+}
+
+.table-view:focused {
+    -fx-border-color: -sf-border;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -sf-surface-hover;
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-border-color: transparent transparent -sf-border transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-size: 38px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -sf-text-muted;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 12px;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: -sf-surface;
+    -fx-border-color: transparent transparent -sf-border transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-cell-size: 40px;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: -sf-surface-hover;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: -sf-accent-soft;
+}
+
+.table-view .table-row-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: -sf-text;
+    -fx-font-size: 12px;
+    -fx-padding: 0 12px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: transparent;
+}
+
+.table-view .placeholder .label {
+    -fx-text-fill: -sf-text-muted;
+    -fx-font-size: 13px;
+}
+
+.table-view .corner {
+    -fx-background-color: -sf-surface-hover;
+}
+
+/* ------------------------------------------------------------------
+   BARRA DE FERRAMENTAS DE DATA (Agenda)
+   ------------------------------------------------------------------ */
+
+.date-toolbar {
+    -fx-background-color: -sf-surface;
+    -fx-background-radius: 12px;
+    -fx-border-color: -sf-border;
+    -fx-border-radius: 12px;
     -fx-border-width: 1px;
     -fx-padding: 12px 15px;
 }
 
 .date-navigation-button {
-    -fx-background-color: #20242a;
-    -fx-text-fill: #d5d8dc;
-    -fx-background-radius: 7px;
+    -fx-background-color: -sf-surface-alt;
+    -fx-text-fill: -sf-text-soft;
+    -fx-background-radius: 8px;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
     -fx-min-width: 36px;
@@ -50,83 +376,34 @@
 }
 
 .date-navigation-button:hover {
-    -fx-background-color: #292e34;
-    -fx-text-fill: #ffffff;
-}
-.date-picker {
-    -fx-background-color: #181b1f;
+    -fx-background-color: -sf-control-hover;
+    -fx-text-fill: -sf-white;
 }
 
-.date-picker .arrow-button {
-    -fx-background-color: #20242a;
-}
-
-.date-picker .arrow-button:hover {
-    -fx-background-color: #292e34;
-}
-
-.date-picker .arrow-button .arrow {
-    -fx-background-color: #eeeeee;
-}
-
-.date-picker .text-field {
-    -fx-background-color: #181b1f;
-    -fx-text-fill: #eeeeee;
-}
-
-/*
-   COMBOBOX
-*/
-
-.combo-box {
-    -fx-background-color: #181b1f;
-    -fx-border-color: #30353b;
-    -fx-border-radius: 8px;
-    -fx-background-radius: 8px;
-}
-
-.combo-box .list-cell {
-    -fx-background-color: #181b1f;
-    -fx-text-fill: #eeeeee;
-}
-
-.combo-box-popup .list-view {
-    -fx-background-color: #181b1f;
-    -fx-border-color: #30353b;
-}
-
-.combo-box-popup .list-cell:hover {
-    -fx-background-color: #292e34;
-}
-
-.combo-box-popup .list-cell:selected {
-    -fx-background-color: #30353b;
-}
-
-/*
-   SCROLLBAR
-*/
+/* ------------------------------------------------------------------
+   BARRAS DE ROLAGEM
+   ------------------------------------------------------------------ */
 
 .scroll-bar {
-    -fx-background-color: #111315;
+    -fx-background-color: transparent;
 }
 
 .scroll-bar .track {
-    -fx-background-color: #111315;
+    -fx-background-color: transparent;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #30353b;
+    -fx-background-color: -sf-border-strong;
     -fx-background-radius: 8px;
 }
 
 .scroll-bar .thumb:hover {
-    -fx-background-color: #454b53;
+    -fx-background-color: -sf-border-hover;
 }
 
 .scroll-bar .increment-button,
 .scroll-bar .decrement-button {
-    -fx-background-color: #111315;
+    -fx-background-color: transparent;
     -fx-padding: 0;
 }
 
@@ -135,27 +412,23 @@
     -fx-background-color: transparent;
 }
 
-/*
+/* ------------------------------------------------------------------
    FORMULÁRIOS (janelas modais)
-   Base comum para os formulários abertos em janelas próprias,
-   seguindo o mesmo tema escuro de .appointment-form.
-*/
+   ------------------------------------------------------------------ */
 
 .new-client-page,
 .employee-form {
-    -fx-background-color: #111315;
+    -fx-background-color: -sf-bg;
 }
 
 /* Áreas de texto: o conteúdo interno do TextArea precisa de fundo próprio */
 .form-text-area,
 .text-area.form-field {
-    -fx-control-inner-background: #181b1f;
-    -fx-background-color: #181b1f;
-    -fx-text-fill: #eeeeee;
-    -fx-prompt-text-fill: #626870;
-    -fx-highlight-fill: #454b53;
-    -fx-highlight-text-fill: #ffffff;
-    -fx-border-color: #30353b;
+    -fx-control-inner-background: -sf-surface;
+    -fx-background-color: -sf-surface;
+    -fx-text-fill: -sf-text;
+    -fx-prompt-text-fill: -sf-text-placeholder;
+    -fx-border-color: -sf-border-strong;
     -fx-border-width: 1px;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
@@ -163,42 +436,24 @@
     -fx-max-width: Infinity;
 }
 
-.form-text-area .content,
-.text-area.form-field .content {
-    -fx-background-color: #181b1f;
+.text-area .content {
+    -fx-background-color: -sf-surface;
     -fx-background-radius: 8px;
 }
 
-.form-text-area .scroll-pane,
-.form-text-area .scroll-pane > .viewport,
-.form-text-area .scroll-pane > .corner,
-.text-area.form-field .scroll-pane,
-.text-area.form-field .scroll-pane > .viewport,
-.text-area.form-field .scroll-pane > .corner {
+.text-area .scroll-pane,
+.text-area .scroll-pane > .viewport,
+.text-area .scroll-pane > .corner {
     -fx-background-color: transparent;
     -fx-background-radius: 8px;
 }
 
-/* ComboBox e DatePicker com a mesma altura dos campos de texto */
-.combo-box.form-field,
-.date-picker.form-field {
-    -fx-padding: 0;
-}
-
-.combo-box.form-field > .list-cell {
-    -fx-padding: 9px 12px;
-}
-
-.date-picker.form-field > .date-picker-display-node {
-    -fx-padding: 9px 12px;
-}
-
 .form-text-area:focused,
 .text-area.form-field:focused {
-    -fx-border-color: #858b95;
+    -fx-border-color: -sf-focus;
 }
 
-/* Campos preenchidos automaticamente (somente leitura) */
+/* Campos preenchidos automaticamente (somente leitura): legíveis */
 .form-field:disabled {
     -fx-opacity: 0.75;
 }

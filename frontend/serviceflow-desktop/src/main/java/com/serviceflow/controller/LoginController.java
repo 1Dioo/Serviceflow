@@ -3,6 +3,7 @@ package com.serviceflow.controller;
 import java.io.IOException;
 
 import com.serviceflow.model.User;
+import com.serviceflow.service.LoginAttemptService;
 import com.serviceflow.service.UserRepository;
 
 import javafx.fxml.FXML;
@@ -42,14 +43,24 @@ public class LoginController {
             return;
         }
 
-        User user = UserRepository.authenticateUser(username, password);
+        LoginAttemptService.Result result = LoginAttemptService.shared().attempt(
+            LoginAttemptService.Channel.USER,
+            username,
+            () -> UserRepository.authenticateUser(username, password)
+        );
 
-        if (user == null) {
+        if (result.status() != LoginAttemptService.Status.SUCCESS) {
             passwordField.clear();
             passwordField.requestFocus();
-            showMessage("Usuário ou senha inválidos.");
+            showMessage(
+                result.status() == LoginAttemptService.Status.LOCKED
+                    ? LoginAttemptService.lockMessage(result.lockRemaining())
+                    : "Usuário ou senha inválidos."
+            );
             return;
         }
+
+        User user = result.user();
 
         UserRepository.setCurrentUser(user);
 

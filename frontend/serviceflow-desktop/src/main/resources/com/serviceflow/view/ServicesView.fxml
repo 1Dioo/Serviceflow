@@ -33,10 +33,10 @@
                     styleClass="primary-button"/>
 
             <padding>
-                <Insets top="30"
-                        right="30"
+                <Insets top="28"
+                        right="28"
                         bottom="20"
-                        left="30"/>
+                        left="28"/>
             </padding>
         </HBox>
     </top>
@@ -77,9 +77,9 @@
 
             <padding>
                 <Insets top="0"
-                        right="30"
-                        bottom="30"
-                        left="30"/>
+                        right="28"
+                        bottom="28"
+                        left="28"/>
             </padding>
 
         </VBox>

@@ -1,25 +1,25 @@
 
 .servicos-page {
-    -fx-background-color: #111315;
+    -fx-background-color: -sf-bg;
     -fx-min-width: 0;
 }
 
 .services-scroll,
 .services-scroll > .viewport {
-    -fx-background-color: #111315;
-    -fx-background: #111315;
+    -fx-background-color: -sf-bg;
+    -fx-background: -sf-bg;
     -fx-border-color: transparent;
 }
 
 .services-list {
-    -fx-background-color: #111315;
+    -fx-background-color: -sf-bg;
     -fx-min-width: 0;
 }
 
 .service-row {
-    -fx-background-color: #181b1f;
+    -fx-background-color: -sf-surface;
     -fx-background-radius: 10px;
-    -fx-border-color: #292e34;
+    -fx-border-color: -sf-control-hover;
     -fx-border-width: 1px;
     -fx-border-radius: 10px;
     -fx-padding: 12px;
@@ -28,8 +28,8 @@
 }
 
 .service-row:hover {
-    -fx-background-color: #1d2125;
-    -fx-border-color: #353b42;
+    -fx-background-color: -sf-surface-hover;
+    -fx-border-color: -sf-border-hover;
 }
 
 .service-info {
@@ -37,34 +37,34 @@
 }
 
 .service-name {
-    -fx-text-fill: #eeeeee;
+    -fx-text-fill: -sf-text;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
     -fx-wrap-text: true;
 }
 
 .service-description {
-    -fx-text-fill: #70757e;
+    -fx-text-fill: -sf-text-subtle;
     -fx-font-size: 11px;
     -fx-wrap-text: true;
 }
 
 .service-data {
-    -fx-text-fill: #858b95;
+    -fx-text-fill: -sf-text-muted;
     -fx-font-size: 12px;
     -fx-min-width: 0;
 }
 
 .service-price {
-    -fx-text-fill: #dfe2e5;
+    -fx-text-fill: -sf-text-soft;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-min-width: 0;
 }
 
 .service-status {
-    -fx-text-fill: #78c99a;
-    -fx-background-color: #193326;
+    -fx-text-fill: -sf-success;
+    -fx-background-color: -sf-success-bg;
     -fx-background-radius: 20px;
     -fx-padding: 6px 8px;
     -fx-font-size: 10px;
@@ -73,12 +73,12 @@
 }
 
 .service-status-inactive {
-    -fx-text-fill: #c98282;
-    -fx-background-color: #2a1e20;
+    -fx-text-fill: -sf-danger;
+    -fx-background-color: -sf-danger-bg-hover;
 }
 
 .services-section-title {
-    -fx-text-fill: #eeeeee;
+    -fx-text-fill: -sf-text;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-padding: 6px 0 0 0;
@@ -86,13 +86,13 @@
 
 .service-form .text-area {
     -fx-pref-height: 100px;
-    -fx-control-inner-background: #181B1F;
-    -fx-background-color: #181B1F;
-    -fx-text-fill: #EEEEEE;
-    -fx-prompt-text-fill: #858B95;
-    -fx-highlight-fill: #454B53;
-    -fx-highlight-text-fill: #FFFFFF;
-    -fx-border-color: #30353B;
+    -fx-control-inner-background: -sf-surface;
+    -fx-background-color: -sf-surface;
+    -fx-text-fill: -sf-text;
+    -fx-prompt-text-fill: -sf-text-muted;
+    -fx-highlight-fill: -sf-border-hover;
+    -fx-highlight-text-fill: -sf-white;
+    -fx-border-color: -sf-border-strong;
     -fx-border-width: 1px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
@@ -100,9 +100,9 @@
 }
 
 .service-form .text-area .content {
-    -fx-background-color: #181B1F;
+    -fx-background-color: -sf-surface;
 }
 
 .service-form .text-area:focused {
-    -fx-border-color: #858B95;
+    -fx-border-color: -sf-focus;
 }

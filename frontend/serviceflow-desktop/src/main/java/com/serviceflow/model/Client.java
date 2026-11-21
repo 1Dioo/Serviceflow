@@ -1,16 +1,27 @@
 package com.serviceflow.model;
 
+import java.util.UUID;
+
 public class Client {
+    // Identificação única e imutável, usada para vincular agendamentos
+    // (nomes podem se repetir ou ser alterados na edição).
+    private final String id;
+
     private String name;
     private String phone;
     private String email;
     private String notes;
 
     public Client(String name, String phone, String email, String notes) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.notes = notes;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {

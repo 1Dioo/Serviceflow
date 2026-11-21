@@ -113,7 +113,8 @@ public class NewServiceController {
         priceField.setText(currencyFormat.format(price));
     }
 
-    private double calculatePrice(String duration) {
+    // Visível no pacote para os testes; a regra de preço não mudou.
+    static double calculatePrice(String duration) {
 
         int minutes;
 

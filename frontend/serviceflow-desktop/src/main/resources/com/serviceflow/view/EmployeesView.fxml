@@ -3,58 +3,62 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!--
+    Funcionários (painel administrativo). Usa as classes do tema:
+    títulos de página, cartões de indicador do Dashboard, campo de busca,
+    tabela padrão e botões primário/perigo.
+-->
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.serviceflow.controller.admin.EmployeesController"
-      spacing="22"
-      style="-fx-background-color: #f5f6fa;">
+      spacing="20"
+      styleClass="employees-page">
 
-    <HBox alignment="CENTER_LEFT">
+    <HBox alignment="CENTER_LEFT" spacing="16">
         <VBox spacing="5" HBox.hgrow="ALWAYS">
             <Label text="Funcionários"
-                   style="-fx-font-size: 27px; -fx-font-weight: bold; -fx-text-fill: #202438;"/>
+                   styleClass="page-title"/>
 
             <Label text="Gerencie os profissionais cadastrados no ServiceFlow."
-                   style="-fx-font-size: 13px; -fx-text-fill: #7d8293;"/>
+                   styleClass="page-subtitle"/>
         </VBox>
 
         <Button text="+ Novo funcionário"
                 onAction="#handleNewEmployee"
-                style="-fx-background-color: #536dfe; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12 18;"/>
+                styleClass="primary-button"/>
     </HBox>
 
-    <HBox spacing="15">
-        <VBox spacing="7"
+    <HBox spacing="16">
+        <VBox spacing="6"
               HBox.hgrow="ALWAYS"
-              style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+              styleClass="stat-card">
             <Label text="TOTAL DE FUNCIONÁRIOS"
-                   style="-fx-text-fill: #85899a; -fx-font-size: 10px;"/>
+                   styleClass="stat-label"/>
 
             <Label fx:id="totalLabel"
                    text="0"
-                   style="-fx-font-size: 25px; -fx-font-weight: bold;"/>
+                   styleClass="stat-value"/>
         </VBox>
 
-        <VBox spacing="7"
+        <VBox spacing="6"
               HBox.hgrow="ALWAYS"
-              style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+              styleClass="stat-card">
             <Label text="FUNCIONÁRIOS ATIVOS"
-                   style="-fx-text-fill: #85899a; -fx-font-size: 10px;"/>
+                   styleClass="stat-label"/>
 
             <Label fx:id="activeLabel"
                    text="0"
-                   style="-fx-font-size: 25px; -fx-font-weight: bold;"/>
+                   styleClass="stat-value"/>
         </VBox>
     </HBox>
 
     <TextField fx:id="searchField"
                promptText="Pesquisar por nome ou área de atuação..."
                onKeyReleased="#handleSearch"
-               style="-fx-padding: 12; -fx-background-radius: 8;"/>
+               styleClass="search-field"/>
 
     <TableView fx:id="employeeTable"
-               VBox.vgrow="ALWAYS"
-               style="-fx-background-radius: 10;">
+               VBox.vgrow="ALWAYS">
 
         <columns>
 
@@ -93,7 +97,7 @@
     <HBox alignment="CENTER_RIGHT">
         <Button text="Remover selecionado"
                 onAction="#handleRemoveEmployee"
-                style="-fx-background-color: #fff0f0; -fx-text-fill: #d94c4c; -fx-padding: 10 15;"/>
+                styleClass="danger-button"/>
     </HBox>
 
 </VBox>

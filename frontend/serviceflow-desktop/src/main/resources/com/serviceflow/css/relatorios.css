@@ -1,22 +1,22 @@
 
 .reports-scroll,
 .reports-scroll > .viewport {
-    -fx-background-color: #111315;
-    -fx-background: #111315;
+    -fx-background-color: -sf-bg;
+    -fx-background: -sf-bg;
     -fx-border-color: transparent;
 }
 
 .reports-page {
-    -fx-background-color: #111315;
+    -fx-background-color: -sf-bg;
     -fx-min-width: 0;
 }
 
 .reports-filter-panel,
 .reports-metric-card,
 .reports-panel {
-    -fx-background-color: #181b1f;
+    -fx-background-color: -sf-surface;
     -fx-background-radius: 12px;
-    -fx-border-color: #292e34;
+    -fx-border-color: -sf-control-hover;
     -fx-border-radius: 12px;
     -fx-border-width: 1px;
     -fx-padding: 16px;
@@ -29,26 +29,26 @@
 }
 
 .reports-section-title {
-    -fx-text-fill: #eeeeee;
+    -fx-text-fill: -sf-text;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-wrap-text: true;
 }
 
 .reports-label {
-    -fx-text-fill: #c8ccd1;
+    -fx-text-fill: -sf-text-secondary;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
 
 .reports-muted {
-    -fx-text-fill: #858b95;
+    -fx-text-fill: -sf-text-muted;
     -fx-font-size: 12px;
     -fx-wrap-text: true;
 }
 
 .reports-small {
-    -fx-text-fill: #70757e;
+    -fx-text-fill: -sf-text-subtle;
     -fx-font-size: 11px;
     -fx-wrap-text: true;
 }
@@ -60,25 +60,27 @@
 }
 
 .reports-metric-value {
-    -fx-text-fill: #f5f5f5;
+    -fx-text-fill: -sf-text-strong;
     -fx-font-size: 24px;
     -fx-font-weight: bold;
 }
 
 .reports-page .combo-box,
 .reports-page .date-picker {
-    -fx-background-color: #20242a;
-    -fx-border-color: #30353b;
-    -fx-border-radius: 7px;
-    -fx-background-radius: 7px;
+    -fx-background-color: -sf-surface-alt;
+    -fx-border-color: -sf-border-strong;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
     -fx-min-width: 0;
 }
 
-.reports-page .combo-box .list-cell,
-.reports-page .date-picker .text-field {
-    -fx-background-color: #20242a;
-    -fx-text-fill: #eeeeee;
-    -fx-prompt-text-fill: #858b95;
+/* Campos dentro de cartões usam a superfície alternativa (como em
+   Configurações); o texto interno fica transparente sobre ela. */
+.reports-page .combo-box > .list-cell,
+.reports-page .date-picker > .text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: -sf-text;
+    -fx-prompt-text-fill: -sf-text-muted;
 }
 
 .reports-page .chart {
@@ -87,20 +89,20 @@
 }
 
 .reports-page .chart-plot-background {
-    -fx-background-color: #181b1f;
+    -fx-background-color: -sf-surface;
 }
 
 .reports-page .chart-vertical-grid-lines,
 .reports-page .chart-horizontal-grid-lines {
-    -fx-stroke: #292e34;
+    -fx-stroke: -sf-control-hover;
 }
 
 .reports-page .axis,
 .reports-page .axis-label {
-    -fx-tick-label-fill: #858b95;
-    -fx-text-fill: #858b95;
+    -fx-tick-label-fill: -sf-text-muted;
+    -fx-text-fill: -sf-text-muted;
 }
 
 .reports-page .chart-title {
-    -fx-text-fill: #eeeeee;
+    -fx-text-fill: -sf-text;
 }

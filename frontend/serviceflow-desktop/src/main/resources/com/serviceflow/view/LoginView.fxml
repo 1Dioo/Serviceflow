@@ -100,7 +100,7 @@
                     styleClass="register-button"/>
 
             <Button text="Modo administrativo"
-                    fx:id="registerButton"
+                    fx:id="adminModeButton"
                     onAction="#handleAdminMode"
                     styleClass="register-button"/>
 

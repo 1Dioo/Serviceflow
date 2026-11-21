@@ -1,6 +1,7 @@
 package com.serviceflow.controller;
 import com.serviceflow.model.User;
 import com.serviceflow.model.User.Role;
+import com.serviceflow.security.AccessPolicy;
 import com.serviceflow.service.UserRepository;
 
 import java.io.IOException;
@@ -20,12 +21,30 @@ public class MainController {
     private VBox contentArea;
 
     @FXML
+    private Label dashboardMenuItem;
+
+    @FXML
+    private Label agendaMenuItem;
+
+    @FXML
+    private Label clientsMenuItem;
+
+    @FXML
+    private Label servicesMenuItem;
+
+    @FXML
+    private Label professionalsMenuItem;
+
+    @FXML
     private Label reportsMenuItem;
 
     @FXML
     private Label settingsMenuItem;
 
     private static Consumer<String> navigator;
+
+    /** Classe visual do item do menu correspondente à tela aberta. */
+    static final String ACTIVE_NAV_CLASS = "nav-item-active";
 
     @FXML
     private void initialize() {
@@ -117,6 +136,23 @@ public class MainController {
         }
     }
 
+    /**
+     * Define quem exibe as telas navegadas por navigateTo (por exemplo,
+     * Serviços ↔ Novo serviço). O painel administrativo se registra aqui
+     * para reutilizar as mesmas telas; a janela principal se registra
+     * ao ser carregada.
+     */
+    public static void registerNavigator(Consumer<String> target) {
+        navigator = target;
+    }
+
+    /** Remove o navegador apenas se ainda for o informado. */
+    public static void clearNavigator(Consumer<String> target) {
+        if (navigator == target) {
+            navigator = null;
+        }
+    }
+
     public static void navigateTo(String fxml) {
         if (navigator != null) {
             navigator.accept(fxml);
@@ -127,24 +163,47 @@ public class MainController {
         navigateTo("/com/serviceflow/view/ServicesView.fxml");
     }
 
+    /**
+     * Destaca no menu a seção da tela aberta (apenas aparência).
+     * Novo serviço pertence à seção Serviços.
+     */
+    private void highlightMenu(String fxml) {
+        Label active = switch (fxml) {
+            case "/com/serviceflow/view/DashboardView.fxml" -> dashboardMenuItem;
+            case "/com/serviceflow/view/AgendaView.fxml" -> agendaMenuItem;
+            case "/com/serviceflow/view/ClientesView.fxml" -> clientsMenuItem;
+            case "/com/serviceflow/view/ServicesView.fxml",
+                 "/com/serviceflow/view/NewServiceView.fxml" -> servicesMenuItem;
+            case "/com/serviceflow/view/ProfissionaisView.fxml" -> professionalsMenuItem;
+            case "/com/serviceflow/view/RelatoriosView.fxml" -> reportsMenuItem;
+            case "/com/serviceflow/view/SettingsView.fxml" -> settingsMenuItem;
+            default -> null;
+        };
+
+        for (Label item : new Label[] {
+                dashboardMenuItem, agendaMenuItem, clientsMenuItem, servicesMenuItem,
+                professionalsMenuItem, reportsMenuItem, settingsMenuItem}) {
+            if (item != null) {
+                item.getStyleClass().remove(ACTIVE_NAV_CLASS);
+            }
+        }
+
+        if (active != null) {
+            active.getStyleClass().add(ACTIVE_NAV_CLASS);
+        }
+    }
+
     private void loadDashboard() {
         loadView("/com/serviceflow/view/DashboardView.fxml");
     }
 
     private boolean isAdmin() {
-        User currentUser = UserRepository.getCurrentUser();
-
-        return currentUser != null
-                && currentUser.getRole() == Role.ADMIN;
+        return AccessPolicy.isAdmin(UserRepository.getCurrentUser());
     }
 
     private void loadView(String fxml) {
 
-        boolean administrativeView =
-                fxml.equals("/com/serviceflow/view/RelatoriosView.fxml")
-                || fxml.equals("/com/serviceflow/view/SettingsView.fxml");
-
-        if (administrativeView && !isAdmin()) {
+        if (AccessPolicy.requiresAdmin(fxml) && !isAdmin()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Acesso restrito");
             alert.setHeaderText("Permissão necessária");
@@ -166,6 +225,7 @@ public class MainController {
             Node view = loader.load();
 
             contentArea.getChildren().setAll(view);
+            highlightMenu(fxml);
 
         } catch (IOException | RuntimeException e) {
             e.printStackTrace();

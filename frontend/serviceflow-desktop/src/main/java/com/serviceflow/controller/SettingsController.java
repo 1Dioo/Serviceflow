@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.serviceflow.service.BusinessHours;
+
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -107,8 +109,9 @@ public class SettingsController {
         addressField.setText(DEFAULT_ADDRESS);
 
         themeCombo.setValue("Escuro");
-        openingTimeCombo.setValue("08:00");
-        closingTimeCombo.setValue("18:00");
+        // Mostra o expediente usado nas validações de agendamento.
+        openingTimeCombo.setValue(BusinessHours.format(BusinessHours.OPENING));
+        closingTimeCombo.setValue(BusinessHours.format(BusinessHours.CLOSING));
         intervalCombo.setValue("15 minutos");
 
         appointmentNotificationsCheck.setSelected(true);

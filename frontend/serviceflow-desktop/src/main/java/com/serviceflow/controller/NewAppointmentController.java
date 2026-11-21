@@ -1,7 +1,10 @@
 package com.serviceflow.controller;
 import com.serviceflow.model.Appointment;
+import com.serviceflow.model.Client;
 import com.serviceflow.model.Service;
+import com.serviceflow.service.AppointmentClients;
 import com.serviceflow.service.AppointmentRepository;
+import com.serviceflow.service.BusinessHours;
 import com.serviceflow.service.ServiceRepository;
 
 import javafx.fxml.FXML;
@@ -11,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.text.NumberFormat;
 import java.time.LocalDate;
@@ -22,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class NewAppointmentController {
     @FXML
-    private TextField clientField;
+    private ComboBox<Client> clientComboBox;
 
     @FXML
     private ComboBox<String> serviceComboBox;
@@ -81,6 +85,8 @@ public class NewAppointmentController {
 
         datePicker.setValue(LocalDate.now());
 
+        setupClientSelector();
+
         serviceComboBox.getItems().setAll(
             ServiceRepository.getActive()
                 .stream()
@@ -113,16 +119,9 @@ public class NewAppointmentController {
         statusCombo.getItems().setAll("Ativo", "Inativo");
         statusCombo.setValue("Ativo");
 
-        for (int hour = 8; hour <= 18; hour++) {
-            timeComboBox.getItems().add(
-                String.format("%02d:00", hour)
-            );
-
-            if (hour < 18) {
-                timeComboBox.getItems().add(
-                    String.format("%02d:30", hour)
-                );
-            }
+        // Horários de início dentro do expediente (ver BusinessHours).
+        for (LocalTime start : BusinessHours.startTimes()) {
+            timeComboBox.getItems().add(start.format(TIME_FORMAT));
         }
 
         serviceComboBox.valueProperty().addListener(
@@ -138,11 +137,44 @@ public class NewAppointmentController {
         }
     }
 
+    /**
+     * Preenche o seletor com os clientes cadastrados. O cliente é
+     * identificado pelo id; nome e telefone servem apenas para exibição.
+     */
+    private void setupClientSelector() {
+        clientComboBox.getItems().setAll(AppointmentClients.selectorItems());
+
+        clientComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Client client) {
+                return AppointmentClients.displayText(client);
+            }
+
+            @Override
+            public Client fromString(String text) {
+                // Seletor não editável: o texto nunca é convertido.
+                return null;
+            }
+        });
+
+        Label placeholder = new Label(AppointmentClients.NO_CLIENTS_MESSAGE);
+        placeholder.setWrapText(true);
+        clientComboBox.setPlaceholder(placeholder);
+    }
+
     private void loadAppointmentData() {
         loadingAppointment = true;
 
         try {
-            clientField.setText(appointmentToEdit.getCliente());
+            Client client = AppointmentClients.findSelected(
+                clientComboBox.getItems(), appointmentToEdit
+            );
+            clientComboBox.setValue(client);
+
+            if (client == null) {
+                showMessage(AppointmentClients.CLIENT_NOT_FOUND_MESSAGE);
+            }
+
             serviceComboBox.setValue(appointmentToEdit.getService());
             categoryCombo.setValue(appointmentToEdit.getCategory());
             descriptionField.setText(appointmentToEdit.getDescription());
@@ -200,8 +232,15 @@ public class NewAppointmentController {
 
     @FXML
     private void handleSave() {
-        String client = clientField.getText() == null
-            ? "" : clientField.getText().trim();
+        Client client = clientComboBox.getValue();
+
+        String clientError = AppointmentClients.validate(client);
+
+        if (clientError != null) {
+            showMessage(clientError);
+            clientComboBox.requestFocus();
+            return;
+        }
 
         String service = serviceComboBox.getValue();
         String category = categoryCombo.getValue();
@@ -214,7 +253,7 @@ public class NewAppointmentController {
         String selectedTime = timeComboBox.getValue();
         String status = statusCombo.getValue();
 
-        if (client.isEmpty() || service == null || category == null
+        if (service == null || category == null
                 || description.isEmpty() || duration == null
                 || date == null || selectedTime == null
                 || status == null) {
@@ -243,23 +282,17 @@ public class NewAppointmentController {
 
         LocalTime time = LocalTime.parse(selectedTime);
 
-        int minutes = Appointment.durationToMinutes(duration);
+        int minutes = AppointmentRepository.effectiveMinutes(duration);
 
-        if (minutes <= 0) {
-            minutes = 30;
-        }
-
-        Appointment conflict = AppointmentRepository.findConflict(
-            date, time, minutes, appointmentToEdit
-        );
-
-        if (conflict != null) {
-            showMessage(
-                "Horário indisponível: conflita com o agendamento de "
-                + conflict.getCliente()
-                + " (" + conflict.getTime().format(TIME_FORMAT)
-                + " às " + conflict.getEndTime().format(TIME_FORMAT) + ")."
+        // Mesma verificação na criação e na edição: expediente
+        // (duração completa do serviço) e conflitos de horário.
+        AppointmentRepository.ScheduleCheck check =
+            AppointmentRepository.checkSchedule(
+                date, time, minutes, appointmentToEdit
             );
+
+        if (!check.isValid()) {
+            showMessage(check.message());
             return;
         }
 
@@ -280,13 +313,19 @@ public class NewAppointmentController {
         } else {
             appointment = appointmentToEdit;
 
-            appointment.setDate(date);
-            appointment.setTime(time);
-            appointment.setCliente(client);
+            // Data, horário e duração passam pela validação do repositório;
+            // se forem recusados, o agendamento não é alterado.
+            try {
+                AppointmentRepository.reschedule(appointment, date, time, duration);
+            } catch (IllegalArgumentException e) {
+                showMessage(e.getMessage());
+                return;
+            }
+
+            appointment.setClient(client);
             appointment.setService(service);
             appointment.setCategory(category);
             appointment.setDescription(description);
-            appointment.setDuration(duration);
             appointment.setPrice(price);
             appointment.setStatus(status);
         }
@@ -304,7 +343,7 @@ public class NewAppointmentController {
     }
 
     private void closeWindow() {
-        Stage stage = (Stage) clientField.getScene().getWindow();
+        Stage stage = (Stage) clientComboBox.getScene().getWindow();
         stage.close();
     }
 
